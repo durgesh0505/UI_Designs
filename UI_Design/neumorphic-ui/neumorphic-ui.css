@@ -1,0 +1,134 @@
+/*!
+ * Neumorphic UI Design System v1.0.0
+ * https://github.com/your-repo/neumorphic-ui
+ *
+ * A comprehensive, modular neumorphic design system with
+ * physics-based interactions and mathematical precision.
+ *
+ * Copyright 2024
+ * Licensed under MIT
+ */
+
+/* ===================================
+   NEUMORPHIC UI - COMPLETE SYSTEM
+   Main Entry Point
+   =================================== */
+
+/* CORE FOUNDATION */
+@import './core/theme-config.css';
+@import './core/neumorphic-base.css';
+
+/* COMPONENTS */
+@import './components/buttons/buttons.css';
+@import './components/forms/forms.css';
+@import './components/cards/cards.css';
+
+/* ANIMATIONS & PHYSICS */
+@import './animations/physics/physics.css';
+
+/* UTILITIES */
+@import './utils/spacing.css';
+@import './utils/typography.css';
+
+/* ===================================
+   GLOBAL STYLES & RESETS
+   =================================== */
+
+/* Smooth box-sizing for all elements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Base body styles for neumorphic design */
+body {
+    font-family: var(--neu-font-family);
+    background: var(--background-color);
+    color: var(--neu-text-primary);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+
+    /* Performance optimizations */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Remove default focus outlines (neumorphic components handle their own) */
+*:focus {
+    outline: none;
+}
+
+/* Ensure smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* High contrast images in dark mode */
+img {
+    filter: contrast(1.1) brightness(0.9);
+}
+
+/* ===================================
+   ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --neu-text-primary: #ffffff;
+        --neu-text-secondary: #e0e0e0;
+        --neu-accent: #4a9eff;
+    }
+}
+
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
+
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus visible for keyboard navigation */
+.focus-visible {
+    box-shadow: 0 0 0 3px var(--neu-accent) !important;
+}
+
+/* Disable user selection where appropriate */
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* GPU acceleration for smooth animations */
+.gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+}

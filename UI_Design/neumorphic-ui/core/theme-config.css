@@ -1,0 +1,443 @@
+/* ===================================
+   CORE THEME CONFIGURATION
+   Advanced Theme System - Inspired by Avalonia Patterns
+   =================================== */
+
+:root {
+    /* BASE THEME CONFIGURATION */
+    --base-theme: 'dark';  /* light | dark */
+
+    /* PRIMARY COLOR PALETTE - Material Design Inspired */
+    --primary-50: hsl(220, 100%, 95%);
+    --primary-100: hsl(220, 100%, 90%);
+    --primary-200: hsl(220, 100%, 80%);
+    --primary-300: hsl(220, 100%, 70%);
+    --primary-400: hsl(220, 100%, 60%);
+    --primary-500: hsl(220, 100%, 50%);  /* Base primary */
+    --primary-600: hsl(220, 100%, 45%);
+    --primary-700: hsl(220, 100%, 40%);
+    --primary-800: hsl(220, 100%, 35%);
+    --primary-900: hsl(220, 100%, 30%);
+
+    /* SECONDARY COLOR PALETTE */
+    --secondary-50: hsl(280, 85%, 95%);
+    --secondary-100: hsl(280, 85%, 90%);
+    --secondary-200: hsl(280, 85%, 80%);
+    --secondary-300: hsl(280, 85%, 70%);
+    --secondary-400: hsl(280, 85%, 60%);
+    --secondary-500: hsl(280, 85%, 50%);
+    --secondary-600: hsl(280, 85%, 45%);
+    --secondary-700: hsl(280, 85%, 40%);
+    --secondary-800: hsl(280, 85%, 35%);
+    --secondary-900: hsl(280, 85%, 30%);
+
+    /* SEMANTIC COLOR SYSTEM */
+    --success-color: hsl(160, 80%, 50%);
+    --warning-color: hsl(35, 95%, 60%);
+    --error-color: hsl(0, 85%, 60%);
+    --info-color: hsl(200, 85%, 60%);
+
+    /* COMPONENT-SPECIFIC COLORS */
+    --photo-color: hsl(300, 75%, 65%);
+    --video-color: hsl(45, 90%, 55%);
+    --audio-color: hsl(270, 80%, 60%);
+    --document-color: hsl(210, 70%, 55%);
+
+    /* ACTIVE COLOR REFERENCES */
+    --color-primary: var(--primary-500);
+    --color-primary-variant: var(--primary-600);
+    --color-secondary: var(--secondary-500);
+    --color-secondary-variant: var(--secondary-600);
+
+    /* SURFACE AND BACKGROUND - UNIFIED MATERIAL SYSTEM */
+    --surface-color: #1a1a1a;     /* Same as background for true neumorphism */
+    --surface-variant: #1d1d1d;   /* Subtle variation for panels */
+    --background-color: #1a1a1a;  /* Base surface material */
+    --on-surface: rgba(255, 255, 255, 0.95);
+    --on-surface-variant: rgba(255, 255, 255, 0.7);
+
+    /* ELEVATION AND DEPTH - CORRECTED NEUMORPHIC SHADOWS */
+    --elevation-0: none;
+    --elevation-1:
+        -2px -2px 4px rgba(255, 255, 255, 0.03),
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    --elevation-2:
+        -4px -4px 8px rgba(255, 255, 255, 0.04),
+        4px 4px 8px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    --elevation-3:
+        -6px -6px 12px rgba(255, 255, 255, 0.04),
+        6px 6px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    --elevation-4:
+        -8px -8px 16px rgba(255, 255, 255, 0.05),
+        8px 8px 16px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+    /* STATE COLORS */
+    --state-hover: rgba(255, 255, 255, 0.08);
+    --state-focus: rgba(255, 255, 255, 0.12);
+    --state-pressed: rgba(255, 255, 255, 0.16);
+    --state-dragged: rgba(255, 255, 255, 0.20);
+    --state-disabled: rgba(255, 255, 255, 0.38);
+
+    /* LEGACY SUPPORT - Maintain backwards compatibility */
+    --primary-h: 220;
+    --primary-s: 100%;
+    --primary-l: 50%;
+    --secondary-h: 280;
+    --secondary-s: 85%;
+    --secondary-l: 50%;
+    --accent-h: 160;
+    --accent-s: 80%;
+    --accent-l: 50%;
+    --warning-h: 35;
+    --warning-s: 95%;
+    --warning-l: 60%;
+    --danger-h: 0;
+    --danger-s: 85%;
+    --danger-l: 60%;
+    --photo-h: 300;
+    --photo-s: 75%;
+    --photo-l: 65%;
+    --video-h: 45;
+    --video-s: 90%;
+    --video-l: 55%;
+
+    /* COMPUTED COLORS FOR BACKWARDS COMPATIBILITY */
+    --color-primary-light: var(--primary-300);
+    --color-primary-dark: var(--primary-700);
+    --color-accent: var(--success-color);
+    --color-warning: var(--warning-color);
+    --color-danger: var(--error-color);
+    --color-photo: var(--photo-color);
+    --color-video: var(--video-color);
+}
+
+/* ===================================
+   LIGHT THEME - CORRECTED NEUMORPHIC IMPLEMENTATION
+   =================================== */
+
+/* Automatic light mode based on OS/browser preference */
+/* Only applies when no manual data-base-theme attribute is set */
+@media (prefers-color-scheme: light) {
+    :root:not([data-base-theme]) {
+        /* UNIFIED MATERIAL SYSTEM - Same approach as dark theme */
+        --surface-color: #f0f0f0;        /* Same as background for material unity */
+        --surface-variant: #ededed;      /* Subtle variation for panels */
+        --background-color: #f0f0f0;     /* Base surface material */
+        --on-surface: rgba(0, 0, 0, 0.9);
+        --on-surface-variant: rgba(0, 0, 0, 0.65);
+
+        /* CORRECTED NEUMORPHIC COLORS - LIGHT THEME OPTIMIZED */
+        --neu-base: #f0f0f0;              /* Same as background for surface unity */
+        --neu-light: rgba(255, 255, 255, 0.9);    /* Bright highlight for visibility */
+        --neu-dark: rgba(0, 0, 0, 0.2);           /* Strong shadow for contrast */
+        --neu-surface-rim: rgba(0, 0, 0, 0.05);   /* Visible surface definition */
+
+        /* ENHANCED PHYSICS PARAMETERS - LIGHT THEME ADJUSTMENTS */
+        --neu-distance: 5px;              /* Slightly increased for visibility */
+        --neu-blur: 10px;                /* Increased for better shadow definition */
+
+        /* CORRECTED ELEVATION SYSTEM - PROPER LIGHT THEME SHADOWS */
+        --elevation-1:
+            -3px -3px 6px rgba(255, 255, 255, 0.9),
+            3px 3px 6px rgba(0, 0, 0, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        --elevation-2:
+            -5px -5px 10px rgba(255, 255, 255, 0.95),
+            5px 5px 10px rgba(0, 0, 0, 0.18),
+            inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        --elevation-3:
+            -6px -6px 12px rgba(255, 255, 255, 1),
+            6px 6px 12px rgba(0, 0, 0, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        --elevation-4:
+            -8px -8px 16px rgba(255, 255, 255, 1),
+            8px 8px 16px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+        /* ACCESSIBLE TEXT COLORS - WCAG AA COMPLIANT */
+        --neu-text-primary: rgba(0, 0, 0, 0.9);     /* High contrast */
+        --neu-text-secondary: rgba(0, 0, 0, 0.65);  /* Medium contrast */
+        --neu-text-muted: rgba(0, 0, 0, 0.45);      /* Low contrast but readable */
+
+        /* STATE COLORS - LIGHT THEME OPTIMIZED */
+        --state-hover: rgba(0, 0, 0, 0.04);
+        --state-focus: rgba(0, 0, 0, 0.08);
+        --state-pressed: rgba(0, 0, 0, 0.12);
+        --state-dragged: rgba(0, 0, 0, 0.16);
+        --state-disabled: rgba(0, 0, 0, 0.38);
+
+        /* OPTIMIZED PRIMARY COLORS - LIGHT THEME CONTRAST */
+        --primary-500: hsl(220, 85%, 45%);          /* Darker for better contrast */
+        --primary-600: hsl(220, 85%, 40%);
+        --color-primary: var(--primary-500);
+        --color-primary-variant: var(--primary-600);
+
+        /* ENHANCED ACCENT COLORS */
+        --success-color: hsl(160, 70%, 40%);        /* Darker for visibility */
+        --warning-color: hsl(35, 85%, 50%);         /* Adjusted for contrast */
+        --error-color: hsl(0, 75%, 50%);           /* Proper contrast ratio */
+    }
+
+    body:not([data-base-theme]) {
+        background-color: #f0f0f0;
+        color: rgba(0, 0, 0, 0.9);
+    }
+}
+
+/* Manual dark mode override (data-base-theme attribute takes precedence) */
+[data-base-theme="dark"] {
+    /* UNIFIED MATERIAL SYSTEM - Dark Theme */
+    --surface-color: #1a1a1a;
+    --surface-variant: #1d1d1d;
+    --background-color: #1a1a1a;
+    --on-surface: rgba(255, 255, 255, 0.95);
+    --on-surface-variant: rgba(255, 255, 255, 0.7);
+
+    /* NEUMORPHIC COLORS - Dark Theme */
+    --neu-base: #1a1a1a;
+    --neu-light: rgba(255, 255, 255, 0.03);
+    --neu-dark: rgba(0, 0, 0, 0.3);
+
+    /* ELEVATION SYSTEM - Dark Theme */
+    --elevation-1:
+        -2px -2px 4px rgba(255, 255, 255, 0.03),
+        2px 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    --elevation-2:
+        -4px -4px 8px rgba(255, 255, 255, 0.04),
+        4px 4px 8px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    --elevation-3:
+        -6px -6px 12px rgba(255, 255, 255, 0.04),
+        6px 6px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    --elevation-4:
+        -8px -8px 16px rgba(255, 255, 255, 0.05),
+        8px 8px 16px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+    /* TEXT COLORS - Dark Theme */
+    --neu-text-primary: rgba(255, 255, 255, 0.95);
+    --neu-text-secondary: rgba(255, 255, 255, 0.7);
+    --neu-text-muted: rgba(255, 255, 255, 0.5);
+
+    /* STATE COLORS - Dark Theme */
+    --state-hover: rgba(255, 255, 255, 0.08);
+    --state-focus: rgba(255, 255, 255, 0.12);
+    --state-pressed: rgba(255, 255, 255, 0.16);
+    --state-dragged: rgba(255, 255, 255, 0.20);
+    --state-disabled: rgba(255, 255, 255, 0.38);
+}
+
+body[data-base-theme="dark"] {
+    background-color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Manual light mode override (data-base-theme attribute takes precedence) */
+[data-base-theme="light"] {
+    /* UNIFIED MATERIAL SYSTEM - Same approach as dark theme */
+    --surface-color: #f0f0f0;        /* Same as background for material unity */
+    --surface-variant: #ededed;      /* Subtle variation for panels */
+    --background-color: #f0f0f0;     /* Base surface material */
+    --on-surface: rgba(0, 0, 0, 0.9);
+    --on-surface-variant: rgba(0, 0, 0, 0.65);
+
+    /* CORRECTED NEUMORPHIC COLORS - LIGHT THEME OPTIMIZED */
+    --neu-base: #f0f0f0;              /* Same as background for surface unity */
+    --neu-light: rgba(255, 255, 255, 0.9);    /* Bright highlight for visibility */
+    --neu-dark: rgba(0, 0, 0, 0.2);           /* Strong shadow for contrast */
+    --neu-surface-rim: rgba(0, 0, 0, 0.05);   /* Visible surface definition */
+
+    /* ENHANCED PHYSICS PARAMETERS - LIGHT THEME ADJUSTMENTS */
+    --neu-distance: 5px;              /* Slightly increased for visibility */
+    --neu-blur: 10px;                /* Increased for better shadow definition */
+
+    /* CORRECTED ELEVATION SYSTEM - PROPER LIGHT THEME SHADOWS */
+    --elevation-1:
+        -3px -3px 6px rgba(255, 255, 255, 0.9),
+        3px 3px 6px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    --elevation-2:
+        -5px -5px 10px rgba(255, 255, 255, 0.95),
+        5px 5px 10px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    --elevation-3:
+        -6px -6px 12px rgba(255, 255, 255, 1),
+        6px 6px 12px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    --elevation-4:
+        -8px -8px 16px rgba(255, 255, 255, 1),
+        8px 8px 16px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+    /* ACCESSIBLE TEXT COLORS - WCAG AA COMPLIANT */
+    --neu-text-primary: rgba(0, 0, 0, 0.9);     /* High contrast */
+    --neu-text-secondary: rgba(0, 0, 0, 0.65);  /* Medium contrast */
+    --neu-text-muted: rgba(0, 0, 0, 0.45);      /* Low contrast but readable */
+
+    /* STATE COLORS - LIGHT THEME OPTIMIZED */
+    --state-hover: rgba(0, 0, 0, 0.04);
+    --state-focus: rgba(0, 0, 0, 0.08);
+    --state-pressed: rgba(0, 0, 0, 0.12);
+    --state-dragged: rgba(0, 0, 0, 0.16);
+    --state-disabled: rgba(0, 0, 0, 0.38);
+
+    /* OPTIMIZED PRIMARY COLORS - LIGHT THEME CONTRAST */
+    --primary-500: hsl(220, 85%, 45%);          /* Darker for better contrast */
+    --primary-600: hsl(220, 85%, 40%);
+    --color-primary: var(--primary-500);
+    --color-primary-variant: var(--primary-600);
+
+    /* ENHANCED ACCENT COLORS */
+    --success-color: hsl(160, 70%, 40%);        /* Darker for visibility */
+    --warning-color: hsl(35, 85%, 50%);         /* Adjusted for contrast */
+    --error-color: hsl(0, 75%, 50%);           /* Proper contrast ratio */
+}
+
+/* ===================================
+   LIGHT THEME - COMPREHENSIVE TEXT COLOR FIXES
+   =================================== */
+
+/* Global text color overrides for light theme */
+[data-base-theme="light"] body {
+    color: var(--neu-text-primary) !important;
+}
+
+/* Ensure all text elements use proper contrast in light theme */
+[data-base-theme="light"] h1,
+[data-base-theme="light"] h2,
+[data-base-theme="light"] h3,
+[data-base-theme="light"] h4,
+[data-base-theme="light"] h5,
+[data-base-theme="light"] h6 {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] p,
+[data-base-theme="light"] span,
+[data-base-theme="light"] div {
+    color: inherit;
+}
+
+/* Button text color fixes */
+[data-base-theme="light"] .neu-btn {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] .neu-btn--primary {
+    color: white !important; /* Primary buttons should have white text */
+}
+
+[data-base-theme="light"] .neu-btn--success {
+    color: white !important;
+}
+
+[data-base-theme="light"] .neu-btn--warning {
+    color: white !important;
+}
+
+/* Form element text colors */
+[data-base-theme="light"] .neu-label {
+    color: var(--neu-text-secondary) !important;
+}
+
+[data-base-theme="light"] .neu-input {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] .neu-input::placeholder {
+    color: var(--neu-text-muted) !important;
+}
+
+/* Card text colors */
+[data-base-theme="light"] .neu-card {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] .neu-card-title {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] .neu-card-subtitle {
+    color: var(--neu-text-secondary) !important;
+}
+
+/* Navigation and link colors */
+[data-base-theme="light"] .nav-link {
+    color: var(--neu-text-secondary) !important;
+}
+
+[data-base-theme="light"] .nav-link.active {
+    color: var(--neu-accent) !important;
+}
+
+[data-base-theme="light"] .nav-link:hover {
+    color: var(--neu-text-primary) !important;
+}
+
+/* Utility text classes for light theme */
+[data-base-theme="light"] .text-primary {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] .text-secondary {
+    color: var(--neu-text-secondary) !important;
+}
+
+[data-base-theme="light"] .text-muted {
+    color: var(--neu-text-muted) !important;
+}
+
+[data-base-theme="light"] .text-accent {
+    color: var(--neu-accent) !important;
+}
+
+/* Specific showcase elements that might have inherited white text */
+[data-base-theme="light"] .section-title {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] .component-label {
+    color: var(--neu-text-secondary) !important;
+}
+
+[data-base-theme="light"] .analysis-title {
+    color: var(--color-primary) !important;
+}
+
+[data-base-theme="light"] .metric-value {
+    color: var(--color-primary) !important;
+}
+
+/* Additional component text color fixes */
+[data-base-theme="light"] .neu-card-header {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] .neu-card-body {
+    color: var(--neu-text-secondary) !important;
+}
+
+[data-base-theme="light"] .neu-avatar {
+    color: var(--neu-text-primary) !important;
+}
+
+[data-base-theme="light"] .theme-label {
+    color: var(--neu-text-secondary) !important;
+}
+
+[data-base-theme="light"] .showcase-section h2 {
+    color: var(--neu-text-primary) !important;
+}
+
+/* Interactive elements text */
+[data-base-theme="light"] .neu-checkbox-wrapper span,
+[data-base-theme="light"] .neu-radio-wrapper span,
+[data-base-theme="light"] .toggle-row span {
+    color: var(--neu-text-primary) !important;
+}

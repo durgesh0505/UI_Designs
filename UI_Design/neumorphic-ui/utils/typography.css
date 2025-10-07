@@ -1,0 +1,187 @@
+/* ===================================
+   TYPOGRAPHY UTILITIES
+   Consistent text styling system
+   =================================== */
+
+/* ===================================
+   FONT SIZE UTILITIES
+   =================================== */
+
+.text-xs { font-size: 0.75rem; }
+.text-sm { font-size: var(--neu-font-size-sm); }
+.text-base { font-size: var(--neu-font-size-base); }
+.text-lg { font-size: var(--neu-font-size-lg); }
+.text-xl { font-size: var(--neu-font-size-xl); }
+.text-2xl { font-size: var(--neu-font-size-2xl); }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+
+/* ===================================
+   FONT WEIGHT UTILITIES
+   =================================== */
+
+.font-thin { font-weight: 100; }
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; }
+
+/* ===================================
+   TEXT COLOR UTILITIES
+   =================================== */
+
+.text-primary { color: var(--neu-text-primary); }
+.text-secondary { color: var(--neu-text-secondary); }
+.text-muted { color: var(--neu-text-muted); }
+.text-accent { color: var(--neu-accent); }
+.text-success { color: var(--neu-success); }
+.text-warning { color: var(--neu-warning); }
+.text-error { color: var(--error-color); }
+
+/* ===================================
+   TEXT ALIGNMENT UTILITIES
+   =================================== */
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* ===================================
+   LINE HEIGHT UTILITIES
+   =================================== */
+
+.leading-none { line-height: 1; }
+.leading-tight { line-height: 1.25; }
+.leading-snug { line-height: 1.375; }
+.leading-normal { line-height: 1.5; }
+.leading-relaxed { line-height: 1.625; }
+.leading-loose { line-height: 2; }
+
+/* ===================================
+   TEXT TRANSFORM UTILITIES
+   =================================== */
+
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
+
+/* ===================================
+   TEXT DECORATION UTILITIES
+   =================================== */
+
+.underline { text-decoration: underline; }
+.line-through { text-decoration: line-through; }
+.no-underline { text-decoration: none; }
+
+/* ===================================
+   FONT STYLE UTILITIES
+   =================================== */
+
+.italic { font-style: italic; }
+.not-italic { font-style: normal; }
+
+/* ===================================
+   TEXT EFFECTS FOR NEUMORPHIC DESIGN
+   =================================== */
+
+/* Neumorphic text shadow */
+.text-neu {
+    text-shadow:
+        1px 1px 2px var(--neu-dark),
+        -1px -1px 2px var(--neu-light);
+}
+
+/* Glowing text effect */
+.text-glow {
+    text-shadow:
+        0 0 10px var(--neu-accent),
+        0 0 20px var(--neu-accent),
+        0 0 30px var(--neu-accent);
+}
+
+/* Subtle text depth */
+.text-depth {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ===================================
+   HEADING STYLES
+   =================================== */
+
+.heading-1 {
+    font-size: var(--neu-font-size-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--neu-text-primary);
+    text-shadow: 1px 1px 2px var(--neu-dark);
+}
+
+.heading-2 {
+    font-size: var(--neu-font-size-xl);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--neu-text-primary);
+    text-shadow: 1px 1px 2px var(--neu-dark);
+}
+
+.heading-3 {
+    font-size: var(--neu-font-size-lg);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--neu-text-primary);
+}
+
+/* ===================================
+   SPECIAL TEXT STYLES
+   =================================== */
+
+/* Code text */
+.text-code {
+    font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+    background: var(--neu-base);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.875em;
+    box-shadow:
+        inset 2px 2px 4px var(--neu-dark),
+        inset -2px -2px 4px var(--neu-light);
+}
+
+/* Quote text */
+.text-quote {
+    font-style: italic;
+    border-left: 4px solid var(--neu-accent);
+    padding-left: var(--neu-space-md);
+    margin-left: var(--neu-space-md);
+    color: var(--neu-text-secondary);
+}
+
+/* Label text */
+.text-label {
+    font-size: var(--neu-font-size-sm);
+    font-weight: 600;
+    color: var(--neu-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ===================================
+   RESPONSIVE TYPOGRAPHY
+   =================================== */
+
+@media (max-width: 768px) {
+    .text-responsive-lg { font-size: var(--neu-font-size-base); }
+    .text-responsive-xl { font-size: var(--neu-font-size-lg); }
+    .text-responsive-2xl { font-size: var(--neu-font-size-xl); }
+}
+
+@media (max-width: 480px) {
+    .text-responsive-lg { font-size: var(--neu-font-size-sm); }
+    .text-responsive-xl { font-size: var(--neu-font-size-base); }
+    .text-responsive-2xl { font-size: var(--neu-font-size-lg); }
+}

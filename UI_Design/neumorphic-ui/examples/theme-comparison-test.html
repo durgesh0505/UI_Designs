@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark vs Light Theme - Corrected Neumorphic Comparison</title>
+    <link rel="stylesheet" href="../neumorphic-ui.css">
+    <style>
+        body {
+            font-family: var(--neu-font-family);
+            background: var(--background-color);
+            color: var(--neu-text-primary);
+            margin: 0;
+            padding: var(--neu-space-xl);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .test-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .theme-header {
+            text-align: center;
+            margin-bottom: calc(var(--neu-space-xl) * 2);
+            padding: var(--neu-space-xl);
+            background: var(--surface-variant);
+            border-radius: var(--neu-radius);
+            box-shadow: var(--elevation-1);
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--neu-space-md);
+            margin-top: var(--neu-space-lg);
+        }
+
+        .theme-label {
+            font-weight: 600;
+            color: var(--neu-text-secondary);
+        }
+
+        .component-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--neu-space-xl);
+            margin-bottom: calc(var(--neu-space-xl) * 2);
+        }
+
+        .showcase-section {
+            background: var(--surface-color);
+            border-radius: var(--neu-radius);
+            padding: var(--neu-space-xl);
+            box-shadow: var(--elevation-2);
+        }
+
+        .section-title {
+            font-size: var(--neu-font-size-xl);
+            font-weight: 700;
+            margin: 0 0 var(--neu-space-lg) 0;
+            color: var(--neu-text-primary);
+            text-align: center;
+        }
+
+        .component-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--neu-space-lg);
+        }
+
+        .component-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--neu-space-md);
+        }
+
+        .component-label {
+            font-size: var(--neu-font-size-sm);
+            font-weight: 600;
+            color: var(--neu-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .button-row {
+            display: flex;
+            gap: var(--neu-space-md);
+            flex-wrap: wrap;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: var(--neu-space-sm);
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .analysis-panel {
+            background: var(--surface-variant);
+            border-radius: var(--neu-radius);
+            padding: var(--neu-space-xl);
+            margin-top: calc(var(--neu-space-xl) * 2);
+            box-shadow: var(--elevation-1);
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--neu-space-xl);
+            margin-top: var(--neu-space-lg);
+        }
+
+        .theme-analysis {
+            padding: var(--neu-space-lg);
+            background: var(--surface-color);
+            border-radius: var(--neu-radius);
+            box-shadow: var(--elevation-1);
+        }
+
+        .analysis-title {
+            font-weight: 700;
+            color: var(--neu-accent);
+            margin-bottom: var(--neu-space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--neu-space-sm);
+        }
+
+        .metric-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .metric-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--neu-space-sm) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: var(--neu-font-size-sm);
+        }
+
+        .metric-list li:last-child {
+            border-bottom: none;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            color: var(--neu-accent);
+        }
+
+        .improvement-summary {
+            background: var(--neu-base);
+            border-radius: var(--neu-radius);
+            padding: var(--neu-space-xl);
+            margin-top: var(--neu-space-xl);
+            box-shadow: var(--elevation-3);
+            text-align: center;
+        }
+
+        /* Light theme specific adjustments */
+        [data-base-theme="light"] .theme-analysis {
+            background: var(--surface-variant);
+        }
+
+        [data-base-theme="light"] .metric-list li {
+            border-bottom-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .component-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body data-base-theme="dark">
+    <div class="test-container">
+        <!-- Header with Theme Toggle -->
+        <div class="theme-header">
+            <h1 style="font-size: 3rem; margin: 0; background: linear-gradient(135deg, var(--neu-text-primary), var(--neu-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                🌗 Theme Comparison
+            </h1>
+            <p style="font-size: var(--neu-font-size-lg); color: var(--neu-text-secondary); margin: var(--neu-space-md) 0 0 0;">
+                Corrected Neumorphic Effects - Dark vs Light Themes
+            </p>
+
+            <div class="theme-toggle">
+                <span class="theme-label">Dark</span>
+                <div class="neu-toggle">
+                    <input type="checkbox" id="themeToggle" class="neu-toggle-input">
+                    <label for="themeToggle" class="neu-toggle-label"></label>
+                </div>
+                <span class="theme-label">Light</span>
+            </div>
+        </div>
+
+        <!-- Component Showcase -->
+        <div class="component-showcase">
+            <!-- Buttons Section -->
+            <div class="showcase-section">
+                <h2 class="section-title">🔘 Buttons</h2>
+                <div class="component-grid">
+                    <div class="component-item">
+                        <div class="component-label">Basic Buttons</div>
+                        <div class="button-row">
+                            <button class="neu-btn">Default</button>
+                            <button class="neu-btn neu-btn--primary">Primary</button>
+                            <button class="neu-btn neu-btn--success">Success</button>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-label">Size Variants</div>
+                        <div class="button-row">
+                            <button class="neu-btn neu-btn--small">Small</button>
+                            <button class="neu-btn">Default</button>
+                            <button class="neu-btn neu-btn--large">Large</button>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-label">Icon Buttons</div>
+                        <div class="button-row">
+                            <button class="neu-btn neu-btn--icon">🔍</button>
+                            <button class="neu-btn neu-btn--icon">❤️</button>
+                            <button class="neu-btn neu-btn--icon">⚙️</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms Section -->
+            <div class="showcase-section">
+                <h2 class="section-title">📝 Forms</h2>
+                <div class="component-grid">
+                    <div class="component-item">
+                        <div class="component-label">Text Inputs</div>
+                        <div class="form-row">
+                            <div class="neu-input-wrapper">
+                                <label class="neu-label">Username</label>
+                                <input type="text" class="neu-input" placeholder="Enter username" value="john_doe">
+                            </div>
+                            <div class="neu-input-wrapper">
+                                <label class="neu-label">Email</label>
+                                <input type="email" class="neu-input" placeholder="your@email.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-label">Toggle Controls</div>
+                        <div class="toggle-row">
+                            <span class="neu-text-primary">Dark Mode</span>
+                            <div class="neu-toggle">
+                                <input type="checkbox" id="demo-toggle1" class="neu-toggle-input" checked>
+                                <label for="demo-toggle1" class="neu-toggle-label"></label>
+                            </div>
+                        </div>
+                        <div class="toggle-row">
+                            <span class="neu-text-primary">Notifications</span>
+                            <div class="neu-toggle">
+                                <input type="checkbox" id="demo-toggle2" class="neu-toggle-input">
+                                <label for="demo-toggle2" class="neu-toggle-label"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-label">Selection Controls</div>
+                        <div class="neu-checkbox-wrapper">
+                            <div class="neu-checkbox">
+                                <input type="checkbox" id="demo-check1" class="neu-checkbox-input" checked>
+                                <label for="demo-check1" class="neu-checkbox-label"></label>
+                            </div>
+                            <span class="neu-text-primary">Remember me</span>
+                        </div>
+                        <div class="neu-radio-wrapper">
+                            <div class="neu-radio">
+                                <input type="radio" id="demo-radio1" name="plan" class="neu-radio-input" checked>
+                                <label for="demo-radio1" class="neu-radio-label"></label>
+                            </div>
+                            <span class="neu-text-primary">Basic Plan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cards Section -->
+            <div class="showcase-section">
+                <h2 class="section-title">🃏 Cards</h2>
+                <div class="component-grid">
+                    <div class="component-item">
+                        <div class="component-label">Profile Card</div>
+                        <div class="neu-card">
+                            <div class="neu-card-header">
+                                <div class="neu-avatar neu-avatar--sm">👤</div>
+                                <div>
+                                    <h4 style="margin: 0; color: var(--neu-text-primary);">John Doe</h4>
+                                    <p style="margin: 0; color: var(--neu-text-secondary); font-size: var(--neu-font-size-sm);">Developer</p>
+                                </div>
+                            </div>
+                            <div class="neu-card-body">
+                                <p style="margin: 0; color: var(--neu-text-secondary); font-size: var(--neu-font-size-sm);">
+                                    Building beautiful neumorphic interfaces with precision.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="component-item">
+                        <div class="component-label">Content Card</div>
+                        <div class="neu-card">
+                            <h4 style="margin: 0 0 var(--neu-space-sm) 0; color: var(--neu-text-primary);">Theme Comparison</h4>
+                            <p style="margin: 0; color: var(--neu-text-secondary); font-size: var(--neu-font-size-sm);">
+                                This card demonstrates the corrected neumorphic effects in both themes.
+                            </p>
+                            <div style="margin-top: var(--neu-space-md);">
+                                <button class="neu-btn neu-btn--small neu-btn--primary">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Panel -->
+        <div class="analysis-panel">
+            <h2 style="text-align: center; color: var(--neu-text-primary); margin: 0 0 var(--neu-space-lg) 0;">
+                🔬 Technical Analysis
+            </h2>
+
+            <div class="analysis-grid">
+                <div class="theme-analysis">
+                    <div class="analysis-title">
+                        🌚 Dark Theme Metrics
+                    </div>
+                    <ul class="metric-list">
+                        <li>
+                            <span>Background Color</span>
+                            <span class="metric-value">#1a1a1a</span>
+                        </li>
+                        <li>
+                            <span>Shadow Distance</span>
+                            <span class="metric-value">4px</span>
+                        </li>
+                        <li>
+                            <span>Light Shadow</span>
+                            <span class="metric-value">rgba(255,255,255,0.04)</span>
+                        </li>
+                        <li>
+                            <span>Dark Shadow</span>
+                            <span class="metric-value">rgba(0,0,0,0.35)</span>
+                        </li>
+                        <li>
+                            <span>Text Contrast</span>
+                            <span class="metric-value">16:1</span>
+                        </li>
+                        <li>
+                            <span>Material Unity</span>
+                            <span class="metric-value">✅ Perfect</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="theme-analysis">
+                    <div class="analysis-title">
+                        ☀️ Light Theme Metrics
+                    </div>
+                    <ul class="metric-list">
+                        <li>
+                            <span>Background Color</span>
+                            <span class="metric-value">#f0f0f0</span>
+                        </li>
+                        <li>
+                            <span>Shadow Distance</span>
+                            <span class="metric-value">5px</span>
+                        </li>
+                        <li>
+                            <span>Light Shadow</span>
+                            <span class="metric-value">rgba(255,255,255,0.9)</span>
+                        </li>
+                        <li>
+                            <span>Dark Shadow</span>
+                            <span class="metric-value">rgba(0,0,0,0.2)</span>
+                        </li>
+                        <li>
+                            <span>Text Contrast</span>
+                            <span class="metric-value">12:1</span>
+                        </li>
+                        <li>
+                            <span>Material Unity</span>
+                            <span class="metric-value">✅ Perfect</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="improvement-summary">
+                <h3 style="color: var(--neu-accent); margin: 0 0 var(--neu-space-md) 0;">
+                    ✨ Achieved True Neumorphism
+                </h3>
+                <p style="color: var(--neu-text-secondary); margin: 0; max-width: 800px; margin: 0 auto;">
+                    Both themes now achieve authentic surface integration with components appearing carved from the same material.
+                    The mathematical corrections ensure optimal visibility and contrast in both light and dark environments
+                    while maintaining the illusion of depth through subtle, natural shadow work.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                body.setAttribute('data-base-theme', 'light');
+            } else {
+                body.setAttribute('data-base-theme', 'dark');
+            }
+        });
+
+        // Add interactive feedback
+        document.querySelectorAll('.neu-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'translateY(1px) scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+</html>

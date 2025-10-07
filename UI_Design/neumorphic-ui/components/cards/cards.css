@@ -1,0 +1,241 @@
+/* ===================================
+   CARDS - CONTENT PLATFORMS
+   =================================== */
+
+.neu-card {
+    background: var(--neu-base);
+    border-radius: var(--neu-radius);
+    padding: var(--neu-space-xl);
+    will-change: transform, box-shadow;
+    position: relative;
+
+    /* PHYSICS-BASED CARD - Floating content surface */
+    transition:
+        transform 0.5s var(--spring-gentle),
+        box-shadow 0.4s var(--spring-gentle),
+        filter 0.3s ease;
+
+    /* RAISED CARD - Content platform */
+    box-shadow:
+        calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-light),
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark),
+        inset 0 0 0 1px var(--surface-highlight); /* Surface definition */
+}
+
+.neu-card:hover {
+    transform: translateY(-2px) scale(1.005);
+    filter: brightness(1.02);
+    box-shadow:
+        calc(-1 * var(--neu-distance) - 3px) calc(-1 * var(--neu-distance) - 3px) calc(var(--neu-blur) + 6px) var(--neu-light),
+        calc(var(--neu-distance) + 3px) calc(var(--neu-distance) + 3px) calc(var(--neu-blur) + 6px) var(--neu-dark),
+        0 0 16px rgba(74, 158, 255, 0.08); /* Content energy field */
+}
+
+/* Subtle content flow animation */
+.neu-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border-radius: var(--neu-radius);
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        transparent 50%,
+        rgba(74, 158, 255, 0.02) 100%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--spring-gentle);
+}
+
+.neu-card:hover::before {
+    opacity: 1;
+}
+
+/* ===================================
+   CARD COMPONENTS
+   =================================== */
+
+/* Card Header */
+.neu-card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--neu-space-md);
+    margin-bottom: var(--neu-space-lg);
+}
+
+.neu-card-title {
+    font-size: var(--neu-font-size-xl);
+    font-weight: 600;
+    color: var(--neu-text-primary);
+    margin: 0;
+}
+
+.neu-card-subtitle {
+    font-size: var(--neu-font-size-sm);
+    color: var(--neu-text-secondary);
+    margin: 0;
+}
+
+/* Card Body */
+.neu-card-body {
+    color: var(--neu-text-primary);
+    line-height: 1.6;
+}
+
+/* Card Actions */
+.neu-card-actions {
+    display: flex;
+    gap: var(--neu-space-md);
+    margin-top: var(--neu-space-lg);
+    padding-top: var(--neu-space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===================================
+   AVATAR COMPONENT
+   =================================== */
+
+.neu-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--neu-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    will-change: transform, box-shadow;
+    position: relative;
+
+    /* PHYSICS-BASED AVATAR - Living identity marker */
+    transition:
+        transform 0.4s var(--spring-gentle),
+        box-shadow 0.3s var(--spring-gentle),
+        filter 0.2s ease;
+
+    /* INSET AVATAR - Identity well */
+    box-shadow:
+        inset 6px 6px 12px var(--neu-dark),
+        inset -6px -6px 12px var(--neu-light),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05); /* Identity boundary */
+}
+
+.neu-avatar:hover {
+    transform: scale(1.05) rotate(1deg);
+    filter: brightness(1.05);
+    box-shadow:
+        inset 8px 8px 16px var(--neu-dark),
+        inset -8px -8px 16px var(--neu-light),
+        0 0 12px rgba(74, 158, 255, 0.2); /* Identity energy */
+}
+
+/* Subtle identity pulse */
+.neu-avatar::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(74, 158, 255, 0.1) 0%,
+        transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s var(--spring-gentle);
+    pointer-events: none;
+}
+
+.neu-avatar:hover::after {
+    opacity: 1;
+}
+
+/* Avatar Sizes */
+.neu-avatar--sm {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.neu-avatar--lg {
+    width: 80px;
+    height: 80px;
+    font-size: 32px;
+}
+
+.neu-avatar--xl {
+    width: 120px;
+    height: 120px;
+    font-size: 48px;
+}
+
+/* ===================================
+   CARD VARIANTS
+   =================================== */
+
+/* Elevated Card */
+.neu-card--elevated {
+    box-shadow: var(--elevation-3);
+}
+
+.neu-card--elevated:hover {
+    box-shadow: var(--elevation-4);
+}
+
+/* Outlined Card */
+.neu-card--outlined {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+}
+
+/* Interactive Card */
+.neu-card--interactive {
+    cursor: pointer;
+    transition: all 0.3s var(--spring-gentle);
+}
+
+.neu-card--interactive:active {
+    transform: translateY(1px) scale(0.995);
+    transition: all 0.1s var(--spring-snappy);
+}
+
+/* Card Sizes */
+.neu-card--compact {
+    padding: var(--neu-space-md);
+}
+
+.neu-card--spacious {
+    padding: var(--neu-space-xl) calc(var(--neu-space-xl) * 1.5);
+}
+
+/* ===================================
+   CARD LAYOUTS
+   =================================== */
+
+/* Card Grid */
+.neu-card-grid {
+    display: grid;
+    gap: var(--neu-space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Card Stack */
+.neu-card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--neu-space-lg);
+}
+
+/* Horizontal Card */
+.neu-card--horizontal {
+    display: flex;
+    align-items: center;
+    gap: var(--neu-space-lg);
+}
+
+.neu-card--horizontal .neu-card-header {
+    margin-bottom: 0;
+    flex-shrink: 0;
+}

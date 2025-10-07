@@ -1,0 +1,146 @@
+/* ===================================
+   NEUMORPHIC CORE SYSTEM
+   Mathematical Foundation & Physics
+   =================================== */
+
+:root {
+    /* CORE NEUMORPHIC COLORS - TRUE SURFACE INTEGRATION */
+    --neu-base: #1a1a1a;           /* Base color - SAME as background for surface unity */
+    --neu-light: rgba(255, 255, 255, 0.04);  /* Subtle surface highlight */
+    --neu-dark: rgba(0, 0, 0, 0.35);         /* Gentle depth shadow */
+    --neu-surface-rim: rgba(255, 255, 255, 0.02); /* Surface definition */
+
+    /* REFINED PHYSICS PARAMETERS - TRUE NEUMORPHIC EMERGENCE */
+    --neu-distance: 4px;           /* Reduced for subtle emergence */
+    --neu-blur: 8px;              /* Crisp surface definition */
+    --neu-radius: 16px;           /* Border radius */
+
+    /* SPRING PHYSICS CURVES */
+    --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --spring-snappy: cubic-bezier(0.175, 0.885, 0.32, 1.4);
+    --spring-gentle: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --spring-exit: cubic-bezier(0.4, 0, 1, 1);
+
+    /* DYNAMIC LIGHTING */
+    --light-intensity: 1;
+    --surface-highlight: rgba(255, 255, 255, 0.1);
+    --depth-shadow: rgba(0, 0, 0, 0.3);
+
+    /* TEXT COLORS (High contrast for accessibility) */
+    --neu-text-primary: #ffffff;   /* Primary text */
+    --neu-text-secondary: #b0b0b0; /* Secondary text */
+    --neu-text-muted: #808080;     /* Muted text */
+
+    /* ACCENT COLORS (Colorful and fun) */
+    --neu-accent: var(--color-primary);
+    --neu-success: var(--color-accent);
+    --neu-warning: var(--color-warning);
+
+    /* SPACING SYSTEM */
+    --neu-space-xs: 4px;
+    --neu-space-sm: 8px;
+    --neu-space-md: 16px;
+    --neu-space-lg: 24px;
+    --neu-space-xl: 32px;
+
+    /* TYPOGRAPHY */
+    --neu-font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    --neu-font-size-sm: 0.875rem;
+    --neu-font-size-base: 1rem;
+    --neu-font-size-lg: 1.125rem;
+    --neu-font-size-xl: 1.25rem;
+    --neu-font-size-2xl: 1.5rem;
+}
+
+/* ===================================
+   CORE NEUMORPHIC EFFECTS
+   =================================== */
+
+/* RAISED EFFECT - For buttons, cards, panels - TRUE SURFACE EMERGENCE */
+.neu-raised {
+    background: var(--neu-base);
+    border-radius: var(--neu-radius);
+    box-shadow:
+        calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-light),
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark),
+        inset 0 1px 0 var(--neu-surface-rim); /* Surface highlight for material unity */
+    transition: all 0.3s var(--spring-gentle);
+}
+
+/* INSET EFFECT - For inputs, pressed states, displays - TRUE SURFACE CARVING */
+.neu-inset {
+    background: var(--neu-base);
+    border-radius: var(--neu-radius);
+    box-shadow:
+        inset calc(var(--neu-distance) * 0.75) calc(var(--neu-distance) * 0.75) calc(var(--neu-blur) * 0.75) var(--neu-dark),
+        inset calc(-1 * var(--neu-distance) * 0.5) calc(-1 * var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-light);
+    transition: all 0.3s var(--spring-gentle);
+}
+
+/* FLAT EFFECT - For neutral backgrounds */
+.neu-flat {
+    background: var(--neu-base);
+    border-radius: var(--neu-radius);
+    box-shadow: none;
+    transition: all 0.3s var(--spring-gentle);
+}
+
+/* ===================================
+   INTERACTION STATES
+   =================================== */
+
+/* Hover Effects - Enhanced surface emergence */
+.neu-raised:hover {
+    box-shadow:
+        calc(-1.5 * var(--neu-distance)) calc(-1.5 * var(--neu-distance)) calc(1.5 * var(--neu-blur)) var(--neu-light),
+        calc(1.5 * var(--neu-distance)) calc(1.5 * var(--neu-distance)) calc(1.5 * var(--neu-blur)) var(--neu-dark),
+        inset 0 1px 0 var(--neu-surface-rim);
+    transform: translateY(-1px);
+}
+
+.neu-inset:hover {
+    box-shadow:
+        inset calc(0.9 * var(--neu-distance)) calc(0.9 * var(--neu-distance)) calc(0.9 * var(--neu-blur)) var(--neu-dark),
+        inset calc(-0.6 * var(--neu-distance)) calc(-0.6 * var(--neu-distance)) calc(0.6 * var(--neu-blur)) var(--neu-light);
+}
+
+/* Active/Pressed Effects */
+.neu-raised:active {
+    box-shadow:
+        inset calc(0.5 * var(--neu-distance)) calc(0.5 * var(--neu-distance)) calc(0.5 * var(--neu-blur)) var(--neu-dark),
+        inset calc(-0.5 * var(--neu-distance)) calc(-0.5 * var(--neu-distance)) calc(0.5 * var(--neu-blur)) var(--neu-light);
+    transform: translateY(1px);
+    transition: all 0.1s var(--spring-snappy);
+}
+
+/* Focus Effects */
+.neu-raised:focus,
+.neu-inset:focus {
+    outline: none;
+    box-shadow:
+        calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-light),
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark),
+        0 0 0 3px var(--neu-accent);
+}
+
+/* ===================================
+   SIZE VARIANTS
+   =================================== */
+
+.neu-sm {
+    --neu-distance: 8px;
+    --neu-blur: 16px;
+    --neu-radius: 12px;
+}
+
+.neu-lg {
+    --neu-distance: 16px;
+    --neu-blur: 24px;
+    --neu-radius: 20px;
+}
+
+.neu-xl {
+    --neu-distance: 20px;
+    --neu-blur: 28px;
+    --neu-radius: 24px;
+}

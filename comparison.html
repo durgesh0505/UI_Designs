@@ -1,0 +1,4042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphic UI Styles Comparison - Three Column</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .main-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .left-panel {
+            width: 33.333%;
+            padding: 2rem;
+            background: #e0e5ec;
+            color: #2d3748;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .left-panel[data-theme="dark"] {
+            background: #2d3436;
+            color: #dfe6e9;
+        }
+
+        .middle-panel {
+            width: 33.333%;
+            padding: 2rem;
+            background: #e0e5ec;
+            color: rgba(0, 0, 0, 0.87);
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            border-left: 1px solid rgba(128, 128, 128, 0.2);
+            border-right: 1px solid rgba(128, 128, 128, 0.2);
+        }
+
+        .middle-panel[data-theme="dark"] {
+            background: #2c2c2c;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .right-panel {
+            width: 33.333%;
+            padding: 2rem;
+            background: #2c2c2c;
+            color: rgba(255, 255, 255, 0.95);
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .right-panel[data-theme="light"] {
+            background: #e0e5ec;
+            color: rgba(0, 0, 0, 0.9);
+        }
+
+        .panel-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(128, 128, 128, 0.2);
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .component-wrapper {
+            margin-bottom: 1.5rem;
+        }
+
+        .component-label {
+            font-size: 0.875rem;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ========================================
+           LEFT PANEL - AVALONIA STYLE
+           ======================================== */
+
+        /* Variables for left panel */
+        .left-panel {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --bg: #e0e5ec;
+            --surface: #e0e5ec;
+            --shadow-dark: #a3b1c6;
+            --shadow-light: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+        }
+
+        /* Automatic dark mode for left panel based on OS/browser preference */
+        /* Only applies when no manual data-theme attribute is set */
+        @media (prefers-color-scheme: dark) {
+            .left-panel:not([data-theme]) {
+                background: #2d3436;
+                color: #dfe6e9;
+                --bg: #2d3436;
+                --surface: #2d3436;
+                --shadow-dark: #1e2124;
+                --shadow-light: #3a3d40;
+                --text-primary: #dfe6e9;
+                --text-secondary: #b2bec3;
+            }
+        }
+
+        /* Manual light mode override for left panel */
+        .left-panel[data-theme="light"] {
+            background: #e0e5ec;
+            color: #2d3748;
+            --bg: #e0e5ec;
+            --surface: #e0e5ec;
+            --shadow-dark: #a3b1c6;
+            --shadow-light: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+        }
+
+        /* Manual dark mode override for left panel */
+        .left-panel[data-theme="dark"] {
+            background: #2d3436;
+            color: #dfe6e9;
+            --bg: #2d3436;
+            --surface: #2d3436;
+            --shadow-dark: #1e2124;
+            --shadow-light: #3a3d40;
+            --text-primary: #dfe6e9;
+            --text-secondary: #b2bec3;
+        }
+
+        .left-panel .theme-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        }
+
+        .left-panel .theme-btn:active {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+        }
+
+        .left-panel .btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--surface);
+            border: none;
+            border-radius: 16px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+            transition: all 0.2s;
+        }
+
+        .left-panel .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .left-panel .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #5856eb);
+            color: white;
+        }
+
+        .left-panel .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #7c3aed);
+            color: white;
+        }
+
+        .left-panel .input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+        }
+
+        .left-panel .input:focus {
+            outline: none;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light), 0 0 0 2px var(--primary);
+        }
+
+        .left-panel .card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+        }
+
+        .left-panel .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .left-panel .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        .left-panel .checkbox {
+            width: 20px;
+            height: 20px;
+            background: var(--surface);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+            appearance: none;
+            position: relative;
+        }
+
+        .left-panel .checkbox:checked {
+            background: var(--primary);
+        }
+
+        .left-panel .checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Radio Buttons */
+        .left-panel .radio {
+            width: 20px;
+            height: 20px;
+            background: var(--surface);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+            appearance: none;
+            position: relative;
+        }
+
+        .left-panel .radio:checked {
+            background: var(--primary);
+        }
+
+        .left-panel .radio:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Toggle Switch */
+        .left-panel .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .left-panel .toggle {
+            width: 50px;
+            height: 26px;
+            background: var(--surface);
+            border-radius: 26px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+            appearance: none;
+            transition: all 0.3s;
+        }
+
+        .left-panel .toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: var(--surface);
+            border-radius: 50%;
+            transition: all 0.3s;
+            box-shadow: 2px 2px 4px var(--shadow-dark), -2px -2px 4px var(--shadow-light);
+        }
+
+        .left-panel .toggle:checked {
+            background: var(--primary);
+        }
+
+        .left-panel .toggle:checked::after {
+            transform: translateX(24px);
+        }
+
+        /* Slider */
+        .left-panel .slider {
+            width: 100%;
+            height: 6px;
+            background: var(--surface);
+            border-radius: 3px;
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .left-panel .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--surface);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+        }
+
+        .left-panel .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--surface);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+        }
+
+        /* Progress Bar */
+        .left-panel .progress {
+            width: 100%;
+            height: 8px;
+            background: var(--surface);
+            border-radius: 4px;
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .left-panel .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        /* Textarea */
+        .left-panel .textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+        }
+
+        /* Select/Dropdown */
+        .left-panel .select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+        }
+
+        /* Icon Button */
+        .left-panel .btn-icon {
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        /* Badge */
+        .left-panel .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .left-panel .badge-secondary {
+            background: var(--secondary);
+        }
+
+        /* Alert */
+        .left-panel .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        }
+
+        .left-panel .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .left-panel .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .left-panel .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .left-panel .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Avatar */
+        .left-panel .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface);
+            font-size: 1.25rem;
+            box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+        }
+
+        /* List */
+        .left-panel .list {
+            list-style: none;
+        }
+
+        .left-panel .list-item {
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            background: var(--surface);
+            box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+        }
+
+        /* Table */
+        .left-panel .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+        }
+
+        .left-panel .table th,
+        .left-panel .table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        .left-panel .table th {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .left-panel .table tr {
+            background: var(--surface);
+            box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+        }
+
+        /* Tabs */
+        .left-panel .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .left-panel .tab {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+        }
+
+        .left-panel .tab.active {
+            color: var(--primary);
+            box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+        }
+
+        /* Pagination */
+        .left-panel .pagination {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .left-panel .page-btn {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface);
+            border: none;
+            cursor: pointer;
+            box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+        }
+
+        .left-panel .page-btn.active {
+            color: var(--primary);
+            box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+        }
+
+        /* Breadcrumbs */
+        .left-panel .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .left-panel .breadcrumb-link {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Accordion */
+        .left-panel .accordion-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .left-panel .accordion-header {
+            width: 100%;
+            padding: 1rem;
+            background: var(--surface);
+            border: none;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+            font-weight: 500;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        }
+
+        .left-panel .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--surface);
+            border-radius: 0 0 8px 8px;
+            box-shadow: inset 2px 2px 4px var(--shadow-dark), inset -2px -2px 4px var(--shadow-light);
+        }
+
+        .left-panel .accordion-content.open {
+            padding: 1rem;
+            max-height: 500px;
+        }
+
+        /* Spinner */
+        .left-panel .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--surface-light);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .left-panel .modal-content {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+        }
+
+        .left-panel .modal-header {
+            margin-bottom: 1rem;
+        }
+
+        .left-panel .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .left-panel .modal-close {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        /* Calendar */
+        .left-panel .calendar {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+        }
+
+        .left-panel .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .left-panel .calendar-header button {
+            background: var(--surface);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-primary);
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+            transition: all 0.2s;
+        }
+
+        .left-panel .calendar-header button:active {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+        }
+
+        .left-panel .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .left-panel .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .left-panel .calendar-date {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+            transition: all 0.2s;
+            color: var(--text-primary);
+        }
+
+        .left-panel .calendar-date:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        }
+
+        .left-panel .calendar-date.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .left-panel .calendar-date.other-month {
+            opacity: 0.3;
+        }
+
+        /* Date Picker */
+        .left-panel .date-picker {
+            position: relative;
+        }
+
+        .left-panel .date-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--surface);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+            cursor: pointer;
+        }
+
+        .left-panel .date-picker-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+            z-index: 100;
+            display: none;
+        }
+
+        .left-panel .date-picker-dropdown.show {
+            display: block;
+        }
+
+        /* Dropdown Single Selection */
+        .left-panel .dropdown {
+            position: relative;
+        }
+
+        .left-panel .dropdown-toggle {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--surface);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            text-align: left;
+            cursor: pointer;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .left-panel .dropdown-toggle:active {
+            box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+        }
+
+        .left-panel .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+            z-index: 100;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .left-panel .dropdown-menu.show {
+            display: block;
+        }
+
+        .left-panel .dropdown-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            color: var(--text-primary);
+        }
+
+        .left-panel .dropdown-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .left-panel .dropdown-item.selected {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Dropdown Multiple Selection */
+        .left-panel .dropdown-multi .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .left-panel .dropdown-multi .dropdown-checkbox-container {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .left-panel .dropdown-multi .dropdown-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .left-panel .dropdown-multi .dropdown-checkbox-label {
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: var(--surface);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            box-shadow:
+                inset 3px 3px 6px var(--shadow-dark),
+                inset -3px -3px 6px var(--shadow-light);
+        }
+
+        .left-panel .dropdown-multi .dropdown-checkbox-label::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 12px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .left-panel .dropdown-multi .dropdown-item input[type="checkbox"]:checked + .dropdown-checkbox-label::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Live Time Display */
+        .left-panel .live-time {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow:
+                10px 10px 20px var(--shadow-dark),
+                -10px -10px 20px var(--shadow-light);
+            text-align: center;
+        }
+
+        .left-panel .live-time-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .left-panel .live-time-display {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.05em;
+        }
+
+        .left-panel .live-time-seconds {
+            color: var(--primary);
+        }
+
+        /* ========================================
+           RIGHT PANEL - UI_DESIGN STYLE
+           ======================================== */
+
+        .right-panel {
+            --neu-base: #2c2c2c;
+            --neu-light: #3a3a3a;
+            --neu-dark: #1e1e1e;
+            --neu-accent: #4a9eff;
+            --neu-success: #26d07c;
+            --neu-warning: #f59e0b;
+            --neu-text: rgba(255, 255, 255, 0.95);
+            --neu-text-dim: rgba(255, 255, 255, 0.7);
+            --neu-distance: 8px;
+            --neu-blur: 16px;
+        }
+
+        /* Automatic light mode for right panel based on OS/browser preference */
+        /* Only applies when no manual data-theme attribute is set */
+        @media (prefers-color-scheme: light) {
+            .right-panel:not([data-theme]) {
+                background: #e0e5ec;
+                color: rgba(0, 0, 0, 0.9);
+                --neu-base: #e0e5ec;
+                --neu-light: #ffffff;
+                --neu-dark: #a3b1c6;
+                --neu-text: rgba(0, 0, 0, 0.9);
+                --neu-text-dim: rgba(0, 0, 0, 0.65);
+            }
+        }
+
+        /* Manual dark mode override for right panel */
+        .right-panel[data-theme="dark"] {
+            background: #2c2c2c;
+            color: rgba(255, 255, 255, 0.95);
+            --neu-base: #2c2c2c;
+            --neu-light: #3a3a3a;
+            --neu-dark: #1e1e1e;
+            --neu-text: rgba(255, 255, 255, 0.95);
+            --neu-text-dim: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Manual light mode override for right panel */
+        .right-panel[data-theme="light"] {
+            background: #e0e5ec;
+            color: rgba(0, 0, 0, 0.9);
+            --neu-base: #e0e5ec;
+            --neu-light: #ffffff;
+            --neu-dark: #a3b1c6;
+            --neu-text: rgba(0, 0, 0, 0.9);
+            --neu-text-dim: rgba(0, 0, 0, 0.65);
+        }
+
+        .right-panel .panel-title,
+        .right-panel .section-title,
+        .right-panel .component-label {
+            color: var(--neu-text);
+        }
+
+        .right-panel .component-label {
+            color: var(--neu-text-dim);
+        }
+
+        .right-panel .theme-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 16px;
+            color: var(--neu-text);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow:
+                -8px -8px 16px var(--neu-light),
+                8px 8px 16px var(--neu-dark);
+        }
+
+        .right-panel .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                -10px -10px 20px var(--neu-light),
+                10px 10px 20px var(--neu-dark);
+        }
+
+        .right-panel .theme-btn:active {
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+        }
+
+        .right-panel .btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 16px;
+            color: var(--neu-text);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow:
+                -8px -8px 16px var(--neu-light),
+                8px 8px 16px var(--neu-dark);
+        }
+
+        .right-panel .btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                -10px -10px 20px var(--neu-light),
+                10px 10px 20px var(--neu-dark);
+        }
+
+        .right-panel .btn:active {
+            transform: translateY(0);
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+        }
+
+        .right-panel .btn-primary {
+            background: linear-gradient(135deg, var(--neu-accent), #3b82f6);
+            color: white;
+            box-shadow:
+                -6px -6px 12px rgba(74, 158, 255, 0.3),
+                6px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .right-panel .btn-success {
+            background: linear-gradient(135deg, var(--neu-success), #10b981);
+            color: white;
+            box-shadow:
+                -6px -6px 12px rgba(38, 208, 124, 0.3),
+                6px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .right-panel .btn-warning {
+            background: linear-gradient(135deg, var(--neu-warning), #f59e0b);
+            color: white;
+            box-shadow:
+                -6px -6px 12px rgba(245, 158, 11, 0.3),
+                6px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .right-panel .input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 16px;
+            color: var(--neu-text);
+            font-size: 1rem;
+            transition: all 0.2s;
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+        }
+
+        .right-panel .input:focus {
+            outline: none;
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light),
+                0 0 0 2px var(--neu-accent);
+        }
+
+        .right-panel .card {
+            background: var(--neu-base);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            box-shadow:
+                -10px -10px 20px var(--neu-light),
+                10px 10px 20px var(--neu-dark);
+        }
+
+        .right-panel .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .right-panel .card h3 {
+            color: var(--neu-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .right-panel .card p {
+            color: var(--neu-text-dim);
+        }
+
+        .right-panel .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        .right-panel .checkbox-container {
+            position: relative;
+        }
+
+        .right-panel .checkbox {
+            display: none;
+        }
+
+        .right-panel .checkbox-label {
+            display: block;
+            width: 24px;
+            height: 24px;
+            background: var(--neu-base);
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+        }
+
+        .right-panel .checkbox-label::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: var(--neu-accent);
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .right-panel .checkbox:checked + .checkbox-label::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Radio Buttons */
+        .right-panel .radio-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+        }
+
+        .right-panel .radio-container {
+            position: relative;
+        }
+
+        .right-panel .radio {
+            display: none;
+        }
+
+        .right-panel .radio-label {
+            display: block;
+            width: 24px;
+            height: 24px;
+            background: var(--neu-base);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+        }
+
+        .right-panel .radio-label::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 8px;
+            height: 8px;
+            background: var(--neu-accent);
+            border-radius: 50%;
+            transition: transform 0.2s;
+            box-shadow: 0 0 8px var(--neu-accent);
+        }
+
+        .right-panel .radio:checked + .radio-label::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Toggle Switch */
+        .right-panel .toggle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .right-panel .toggle-container {
+            position: relative;
+        }
+
+        .right-panel .toggle {
+            display: none;
+        }
+
+        .right-panel .toggle-label {
+            display: block;
+            width: 60px;
+            height: 32px;
+            background: var(--neu-base);
+            border-radius: 32px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+            box-shadow:
+                inset 6px 6px 12px var(--neu-dark),
+                inset -6px -6px 12px var(--neu-light);
+        }
+
+        .right-panel .toggle-label::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: var(--neu-base);
+            border-radius: 50%;
+            transition: all 0.3s;
+            box-shadow:
+                -4px -4px 8px var(--neu-light),
+                4px 4px 8px var(--neu-dark);
+        }
+
+        .right-panel .toggle:checked + .toggle-label {
+            background: var(--neu-accent);
+        }
+
+        .right-panel .toggle:checked + .toggle-label::after {
+            transform: translateX(28px);
+        }
+
+        /* Slider */
+        .right-panel .slider {
+            width: 100%;
+            height: 6px;
+            background: var(--neu-base);
+            border-radius: 3px;
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .right-panel .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--neu-base);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow:
+                -4px -4px 8px var(--neu-light),
+                4px 4px 8px var(--neu-dark);
+        }
+
+        .right-panel .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--neu-base);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow:
+                -4px -4px 8px var(--neu-light),
+                4px 4px 8px var(--neu-dark);
+        }
+
+        /* Progress Bar */
+        .right-panel .progress {
+            width: 100%;
+            height: 8px;
+            background: var(--neu-base);
+            border-radius: 4px;
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .right-panel .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neu-accent), var(--neu-success));
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        /* Right Panel: Textarea */
+        .right-panel .textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            box-shadow:
+                inset var(--neu-distance) var(--neu-distance) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 0.5) var(--neu-light);
+            color: var(--neu-text);
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .right-panel .textarea:focus {
+            outline: none;
+            box-shadow:
+                inset var(--neu-distance) var(--neu-distance) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 0.5) var(--neu-light),
+                0 0 0 2px var(--neu-accent);
+        }
+
+        /* Right Panel: Select */
+        .right-panel .select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 12px;
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text);
+            font-family: inherit;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+        }
+
+        .right-panel .select:hover {
+            box-shadow:
+                calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.1) var(--neu-light),
+                calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.1) var(--neu-dark);
+        }
+
+        .right-panel .select:focus {
+            outline: none;
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark),
+                0 0 0 2px var(--neu-accent);
+        }
+
+        /* Right Panel: Icon Button */
+        .right-panel .icon-btn {
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--neu-base);
+            border: none;
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .right-panel .icon-btn:hover {
+            box-shadow:
+                calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.1) var(--neu-light),
+                calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.1) var(--neu-dark);
+        }
+
+        .right-panel .icon-btn:active {
+            box-shadow:
+                inset var(--neu-distance) var(--neu-distance) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 0.5) var(--neu-light);
+        }
+
+        /* Right Panel: Badge */
+        .right-panel .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--neu-accent);
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow:
+                calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) rgba(255, 255, 255, 0.1),
+                calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) rgba(0, 0, 0, 0.3);
+        }
+
+        .right-panel .badge.success {
+            background: var(--neu-success);
+        }
+
+        .right-panel .badge.warning {
+            background: var(--neu-warning);
+        }
+
+        .right-panel .badge.danger {
+            background: var(--neu-danger);
+        }
+
+        /* Right Panel: Alert */
+        .right-panel .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            margin-bottom: 1rem;
+        }
+
+        .right-panel .alert.info {
+            background: var(--neu-accent);
+            color: white;
+        }
+
+        .right-panel .alert.success {
+            background: var(--neu-success);
+            color: white;
+        }
+
+        .right-panel .alert.warning {
+            background: var(--neu-warning);
+            color: white;
+        }
+
+        .right-panel .alert.error {
+            background: var(--neu-danger);
+            color: white;
+        }
+
+        /* Right Panel: Avatar */
+        .right-panel .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--neu-base);
+            box-shadow:
+                inset var(--neu-distance) var(--neu-distance) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 0.5) var(--neu-light);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neu-text);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .right-panel .avatar.sm {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+        }
+
+        .right-panel .avatar.lg {
+            width: 96px;
+            height: 96px;
+            font-size: 2rem;
+        }
+
+        /* Right Panel: List */
+        .right-panel .list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .right-panel .list-item {
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 12px;
+            background: var(--neu-base);
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            transition: all 0.2s;
+        }
+
+        .right-panel .list-item:hover {
+            box-shadow:
+                calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.1) var(--neu-light),
+                calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.1) var(--neu-dark);
+        }
+
+        /* Right Panel: Table */
+        .right-panel .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+        }
+
+        .right-panel .table th,
+        .right-panel .table td {
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .right-panel .table th {
+            font-weight: 600;
+            color: var(--neu-text);
+        }
+
+        .right-panel .table tr {
+            background: var(--neu-base);
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+        }
+
+        .right-panel .table tbody tr:hover {
+            box-shadow:
+                calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.1) var(--neu-light),
+                calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.1) var(--neu-dark);
+        }
+
+        /* Right Panel: Tabs */
+        .right-panel .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .right-panel .tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 12px;
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .right-panel .tab:hover {
+            box-shadow:
+                calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.1) var(--neu-light),
+                calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.1) var(--neu-dark);
+        }
+
+        .right-panel .tab.active {
+            color: var(--neu-accent);
+            box-shadow:
+                inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.3) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.3) var(--neu-light);
+        }
+
+        /* Right Panel: Pagination */
+        .right-panel .pagination {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .right-panel .page-btn {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 8px;
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .right-panel .page-btn:hover {
+            box-shadow:
+                calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.1) var(--neu-light),
+                calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.1) var(--neu-dark);
+        }
+
+        .right-panel .page-btn.active {
+            color: var(--neu-accent);
+            box-shadow:
+                inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.3) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.3) var(--neu-light);
+        }
+
+        /* Right Panel: Breadcrumbs */
+        .right-panel .breadcrumbs {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .right-panel .breadcrumb-item {
+            color: var(--neu-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .right-panel .breadcrumb-item:hover {
+            color: var(--neu-accent);
+        }
+
+        .right-panel .breadcrumb-item.active {
+            color: var(--neu-accent);
+            font-weight: 600;
+        }
+
+        .right-panel .breadcrumb-separator {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Right Panel: Accordion */
+        .right-panel .accordion-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .right-panel .accordion-header {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 12px;
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text);
+            cursor: pointer;
+            text-align: left;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .right-panel .accordion-header:hover {
+            box-shadow:
+                calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.1) var(--neu-light),
+                calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.1) var(--neu-dark);
+        }
+
+        .right-panel .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--neu-base);
+            border-radius: 0 0 12px 12px;
+        }
+
+        .right-panel .accordion-content.open {
+            padding: 1rem 1.5rem;
+            max-height: 500px;
+            box-shadow:
+                inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.3) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.3) var(--neu-light);
+        }
+
+        /* Right Panel: Spinner */
+        .right-panel .spinner {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--neu-accent), transparent);
+            animation: spin 1s linear infinite;
+            position: relative;
+        }
+
+        .right-panel .spinner::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            background: var(--neu-base);
+            border-radius: 50%;
+        }
+
+        /* Right Panel: Modal */
+        .right-panel .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .right-panel .modal.show {
+            display: flex;
+        }
+
+        .right-panel .modal-content {
+            background: var(--neu-base);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow:
+                calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+                calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .right-panel .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .right-panel .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--neu-text);
+        }
+
+        .right-panel .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--neu-text);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .right-panel .modal-close:hover {
+            background: var(--neu-base);
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+        }
+
+        /* Calendar */
+        .right-panel .calendar {
+            background: var(--neu-base);
+            border-radius: var(--neu-radius-lg);
+            padding: 1.5rem;
+            box-shadow:
+                calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+                calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+        }
+
+        .right-panel .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--neu-text);
+        }
+
+        .right-panel .calendar-header button {
+            background: var(--neu-base);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: var(--neu-radius-md);
+            cursor: pointer;
+            color: var(--neu-text);
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            transition: all var(--neu-transition-fast);
+        }
+
+        .right-panel .calendar-header button:active {
+            box-shadow:
+                inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-light);
+        }
+
+        .right-panel .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .right-panel .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--neu-text-dim);
+            text-transform: uppercase;
+        }
+
+        .right-panel .calendar-date {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--neu-base);
+            border-radius: var(--neu-radius-sm);
+            cursor: pointer;
+            font-size: 0.875rem;
+            box-shadow:
+                calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) var(--neu-blur) var(--neu-light),
+                calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) var(--neu-blur) var(--neu-dark);
+            transition: all var(--neu-transition-fast);
+            color: var(--neu-text);
+        }
+
+        .right-panel .calendar-date:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 1.5) var(--neu-light),
+                calc(var(--neu-distance) * 1) calc(var(--neu-distance) * 1) calc(var(--neu-blur) * 1.5) var(--neu-dark);
+        }
+
+        .right-panel .calendar-date.active {
+            background: var(--neu-accent);
+            color: white;
+            box-shadow:
+                inset 2px 2px 6px rgba(0,0,0,0.3),
+                inset -2px -2px 6px rgba(255,255,255,0.1);
+        }
+
+        .right-panel .calendar-date.other-month {
+            opacity: 0.3;
+        }
+
+        /* Date Picker */
+        .right-panel .date-picker {
+            position: relative;
+        }
+
+        .right-panel .date-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: var(--neu-radius-md);
+            color: var(--neu-text);
+            font-size: 1rem;
+            box-shadow:
+                inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) var(--neu-blur) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) var(--neu-blur) var(--neu-light);
+            cursor: pointer;
+        }
+
+        .right-panel .date-picker-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            right: 0;
+            background: var(--neu-base);
+            border-radius: var(--neu-radius-lg);
+            padding: 1rem;
+            box-shadow:
+                calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+                calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+            z-index: 100;
+            display: none;
+        }
+
+        .right-panel .date-picker-dropdown.show {
+            display: block;
+        }
+
+        /* Dropdown Single Selection */
+        .right-panel .dropdown {
+            position: relative;
+        }
+
+        .right-panel .dropdown-toggle {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: var(--neu-radius-md);
+            color: var(--neu-text);
+            font-size: 1rem;
+            text-align: left;
+            cursor: pointer;
+            box-shadow:
+                calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            transition: all var(--neu-transition-fast);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .right-panel .dropdown-toggle:active {
+            box-shadow:
+                inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-light);
+        }
+
+        .right-panel .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            right: 0;
+            background: var(--neu-base);
+            border-radius: var(--neu-radius-md);
+            padding: 0.5rem;
+            box-shadow:
+                calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+                calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+            z-index: 100;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .right-panel .dropdown-menu.show {
+            display: block;
+        }
+
+        .right-panel .dropdown-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-radius: var(--neu-radius-sm);
+            transition: all var(--neu-transition-fast);
+            color: var(--neu-text);
+        }
+
+        .right-panel .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .right-panel .dropdown-item.selected {
+            background: var(--neu-accent);
+            color: white;
+        }
+
+        /* Dropdown Multiple Selection */
+        .right-panel .dropdown-multi .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .right-panel .dropdown-multi .dropdown-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ========================================
+           MIDDLE PANEL - UI_DESIGN_UPDATE STYLE
+           ======================================== */
+
+        /* Copy all right-panel styles but scope to middle-panel */
+        .middle-panel {
+            --neu-base: #e0e5ec;
+            --neu-dark: rgba(163, 177, 198, 0.6);
+            --neu-light: rgba(255, 255, 255, 0.9);
+            --neu-accent: #4a9eff;
+            --neu-success: #26d07c;
+            --neu-warning: #f5a623;
+            --neu-danger: #f56565;
+            --neu-text: rgba(0, 0, 0, 0.87);
+            --neu-text-dim: rgba(0, 0, 0, 0.6);
+            --neu-distance: 8px;
+            --neu-blur: 16px;
+        }
+
+        /* Automatic dark mode for middle panel based on OS/browser preference */
+        /* Only applies when no manual data-theme attribute is set */
+        @media (prefers-color-scheme: dark) {
+            .middle-panel:not([data-theme]) {
+                background: #2c2c2c;
+                color: rgba(255, 255, 255, 0.95);
+                --neu-base: #2c2c2c;
+                --neu-dark: rgba(0, 0, 0, 0.4);
+                --neu-light: rgba(255, 255, 255, 0.05);
+                --neu-text: rgba(255, 255, 255, 0.95);
+                --neu-text-dim: rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        /* Manual light mode override for middle panel */
+        .middle-panel[data-theme="light"] {
+            background: #e0e5ec;
+            color: rgba(0, 0, 0, 0.87);
+            --neu-base: #e0e5ec;
+            --neu-dark: rgba(163, 177, 198, 0.6);
+            --neu-light: rgba(255, 255, 255, 0.9);
+            --neu-text: rgba(0, 0, 0, 0.87);
+            --neu-text-dim: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Manual dark mode override for middle panel */
+        .middle-panel[data-theme="dark"] {
+            background: #2c2c2c;
+            color: rgba(255, 255, 255, 0.95);
+            --neu-base: #2c2c2c;
+            --neu-dark: rgba(0, 0, 0, 0.4);
+            --neu-light: rgba(255, 255, 255, 0.05);
+            --neu-text: rgba(255, 255, 255, 0.95);
+            --neu-text-dim: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Use all the same component styles as right-panel but scoped to middle-panel */
+        .middle-panel .section-title,
+        .middle-panel .component-label {
+            color: var(--neu-text);
+        }
+
+        .middle-panel .component-label {
+            color: var(--neu-text-dim);
+        }
+
+        .middle-panel .theme-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 16px;
+            color: var(--neu-text);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow:
+                -8px -8px 16px var(--neu-light),
+                8px 8px 16px var(--neu-dark);
+        }
+
+        .middle-panel .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                -10px -10px 20px var(--neu-light),
+                10px 10px 20px var(--neu-dark);
+        }
+
+        .middle-panel .theme-btn:active {
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+        }
+
+        .middle-panel .btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 16px;
+            color: var(--neu-text);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow:
+                -8px -8px 16px var(--neu-light),
+                8px 8px 16px var(--neu-dark);
+        }
+
+        .middle-panel .btn:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                -10px -10px 20px var(--neu-light),
+                10px 10px 20px var(--neu-dark);
+        }
+
+        .middle-panel .btn:active {
+            transform: translateY(0);
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+        }
+
+        .middle-panel .btn-primary {
+            background: linear-gradient(135deg, var(--neu-accent), #3b82f6);
+            color: white;
+            box-shadow:
+                -6px -6px 12px rgba(74, 158, 255, 0.3),
+                6px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .middle-panel .btn-success {
+            background: linear-gradient(135deg, var(--neu-success), #10b981);
+            color: white;
+            box-shadow:
+                -6px -6px 12px rgba(38, 208, 124, 0.3),
+                6px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .middle-panel .btn-warning {
+            background: linear-gradient(135deg, var(--neu-warning), #f59e0b);
+            color: white;
+            box-shadow:
+                -6px -6px 12px rgba(245, 158, 11, 0.3),
+                6px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .middle-panel .input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: 16px;
+            color: var(--neu-text);
+            font-size: 1rem;
+            transition: all 0.2s;
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light);
+        }
+
+        .middle-panel .input:focus {
+            outline: none;
+            box-shadow:
+                inset 4px 4px 8px var(--neu-dark),
+                inset -4px -4px 8px var(--neu-light),
+                0 0 0 2px var(--neu-accent);
+        }
+
+        .middle-panel .card {
+            background: var(--neu-base);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            box-shadow:
+                -10px -10px 20px var(--neu-light),
+                10px 10px 20px var(--neu-dark);
+        }
+
+        .middle-panel .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .middle-panel .card h3 {
+            color: var(--neu-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .middle-panel .card p {
+            color: var(--neu-text-dim);
+        }
+
+        /* Checkbox, radio, toggle, slider - same as right panel */
+        .middle-panel .checkbox-wrapper { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; cursor: pointer; }
+        .middle-panel .checkbox-container { position: relative; }
+        .middle-panel .checkbox { display: none; }
+        .middle-panel .checkbox-label {
+            display: block; width: 24px; height: 24px; background: var(--neu-base); border-radius: 4px;
+            cursor: pointer; position: relative; transition: all 0.2s;
+            box-shadow: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light);
+        }
+        .middle-panel .checkbox-label::after {
+            content: '✓'; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0); color: var(--neu-accent);
+            font-weight: bold; font-size: 14px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .middle-panel .checkbox:checked + .checkbox-label::after { transform: translate(-50%, -50%) scale(1); }
+
+        .middle-panel .radio-wrapper { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; cursor: pointer; }
+        .middle-panel .radio-container { position: relative; }
+        .middle-panel .radio { display: none; }
+        .middle-panel .radio-label {
+            display: block; width: 24px; height: 24px; background: var(--neu-base); border-radius: 50%;
+            cursor: pointer; position: relative; transition: all 0.4s;
+            box-shadow: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light);
+        }
+        .middle-panel .radio-label::after {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0); width: 8px; height: 8px;
+            background: var(--neu-accent); border-radius: 50%; transition: transform 0.4s;
+            box-shadow: 0 0 8px var(--neu-accent);
+        }
+        .middle-panel .radio:checked + .radio-label::after { transform: translate(-50%, -50%) scale(1); }
+
+        .middle-panel .toggle-wrapper { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+        .middle-panel .toggle-container { position: relative; }
+        .middle-panel .toggle { display: none; }
+        .middle-panel .toggle-label {
+            display: block; width: 60px; height: 32px; background: var(--neu-base); border-radius: 32px;
+            cursor: pointer; position: relative; transition: all 0.3s;
+            box-shadow: inset 6px 6px 12px var(--neu-dark), inset -6px -6px 12px var(--neu-light);
+        }
+        .middle-panel .toggle-label::after {
+            content: ''; position: absolute; top: 4px; left: 4px; width: 24px; height: 24px;
+            background: var(--neu-base); border-radius: 50%; transition: all 0.3s;
+            box-shadow: -4px -4px 8px var(--neu-light), 4px 4px 8px var(--neu-dark);
+        }
+        .middle-panel .toggle:checked + .toggle-label { background: var(--neu-accent); }
+        .middle-panel .toggle:checked + .toggle-label::after { transform: translateX(28px); }
+
+        .middle-panel .slider {
+            width: 100%; height: 6px; background: var(--neu-base); border-radius: 3px;
+            box-shadow: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light);
+            appearance: none; cursor: pointer;
+        }
+        .middle-panel .slider::-webkit-slider-thumb {
+            appearance: none; width: 20px; height: 20px; background: var(--neu-accent); border-radius: 50%; cursor: pointer;
+            box-shadow: -4px -4px 8px rgba(255, 255, 255, 0.3), 4px 4px 8px rgba(0, 0, 0, 0.4), 0 0 12px var(--neu-accent);
+        }
+        .middle-panel .slider::-moz-range-thumb {
+            width: 20px; height: 20px; background: var(--neu-accent); border-radius: 50%; cursor: pointer; border: none;
+            box-shadow: -4px -4px 8px rgba(255, 255, 255, 0.3), 4px 4px 8px rgba(0, 0, 0, 0.4), 0 0 12px var(--neu-accent);
+        }
+
+        .middle-panel .progress {
+            width: 100%; height: 8px; background: var(--neu-base); border-radius: 4px;
+            box-shadow: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light);
+            overflow: hidden; position: relative;
+        }
+        .middle-panel .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--neu-accent), var(--neu-success));
+            border-radius: 4px; transition: width 0.3s;
+        }
+
+        /* Add abbreviated versions of all other components */
+        .middle-panel .textarea { width: 100%; padding: 0.75rem 1rem; background: transparent; border: none; border-radius: 12px;
+            box-shadow: inset var(--neu-distance) var(--neu-distance) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 0.5) var(--neu-light);
+            color: var(--neu-text); font-family: inherit; resize: vertical; min-height: 100px; }
+        .middle-panel .textarea:focus { outline: none;
+            box-shadow: inset var(--neu-distance) var(--neu-distance) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 0.5) var(--neu-light),
+                0 0 0 2px var(--neu-accent); }
+
+        .middle-panel .select { width: 100%; padding: 0.75rem 1rem; background: var(--neu-base); border: none; border-radius: 12px;
+            box-shadow: calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text); font-family: inherit; cursor: pointer; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 1rem center; }
+
+        .middle-panel .icon-btn { width: 48px; height: 48px; padding: 0; display: inline-flex; align-items: center; justify-content: center;
+            border-radius: 50%; background: var(--neu-base); border: none;
+            box-shadow: calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text); cursor: pointer; font-size: 1.25rem; transition: all 0.2s; }
+        .middle-panel .icon-btn:active { box-shadow: inset var(--neu-distance) var(--neu-distance) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 0.5) var(--neu-light); }
+
+        .middle-panel .badge { display: inline-block; padding: 0.25rem 0.75rem; background: var(--neu-accent);
+            color: white; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+        .middle-panel .badge.success { background: var(--neu-success); }
+        .middle-panel .badge.warning { background: var(--neu-warning); }
+        .middle-panel .badge.danger { background: var(--neu-danger); }
+
+        .middle-panel .alert { padding: 1rem 1.5rem; border-radius: 12px;
+            box-shadow: calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            margin-bottom: 1rem; }
+        .middle-panel .alert.info { background: var(--neu-accent); color: white; }
+        .middle-panel .alert.success { background: var(--neu-success); color: white; }
+        .middle-panel .alert.warning { background: var(--neu-warning); color: white; }
+        .middle-panel .alert.error { background: var(--neu-danger); color: white; }
+
+        .middle-panel .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--neu-base);
+            box-shadow: inset var(--neu-distance) var(--neu-distance) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+                inset calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) calc(var(--neu-blur) * 0.5) var(--neu-light);
+            display: inline-flex; align-items: center; justify-content: center; color: var(--neu-text);
+            font-size: 1.5rem; font-weight: 600; }
+        .middle-panel .avatar.sm { width: 40px; height: 40px; font-size: 1rem; }
+        .middle-panel .avatar.lg { width: 96px; height: 96px; font-size: 2rem; }
+
+        .middle-panel .list { list-style: none; padding: 0; margin: 0; }
+        .middle-panel .list-item { padding: 1rem 1.5rem; margin-bottom: 0.5rem; border-radius: 12px; background: var(--neu-base);
+            box-shadow: calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            transition: all 0.2s; }
+
+        .middle-panel .table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .middle-panel .table th, .middle-panel .table td { padding: 1rem; text-align: left; }
+        .middle-panel .table th { font-weight: 600; color: var(--neu-text); }
+        .middle-panel .table tr { background: var(--neu-base);
+            box-shadow: calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark); }
+
+        .middle-panel .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .middle-panel .tab { padding: 0.75rem 1.5rem; background: var(--neu-base); border: none; border-radius: 12px;
+            box-shadow: calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text); cursor: pointer; transition: all 0.2s; }
+        .middle-panel .tab.active { color: var(--neu-accent);
+            box-shadow: inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.3) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.3) var(--neu-light); }
+
+        .middle-panel .pagination { display: flex; gap: 0.5rem; justify-content: center; }
+        .middle-panel .page-btn { width: 40px; height: 40px; padding: 0; background: var(--neu-base); border: none; border-radius: 8px;
+            box-shadow: calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text); cursor: pointer; transition: all 0.2s; }
+        .middle-panel .page-btn.active { color: var(--neu-accent);
+            box-shadow: inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.3) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.3) var(--neu-light); }
+
+        .middle-panel .breadcrumbs { display: flex; gap: 0.5rem; align-items: center; }
+        .middle-panel .breadcrumb-item { color: var(--neu-text); text-decoration: none; transition: color 0.2s; }
+        .middle-panel .breadcrumb-item:hover { color: var(--neu-accent); }
+        .middle-panel .breadcrumb-item.active { color: var(--neu-accent); font-weight: 600; }
+        .middle-panel .breadcrumb-separator { color: rgba(255, 255, 255, 0.3); }
+
+        .middle-panel .accordion-item { margin-bottom: 0.5rem; }
+        .middle-panel .accordion-header { width: 100%; padding: 1rem 1.5rem; background: var(--neu-base); border: none; border-radius: 12px;
+            box-shadow: calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+                var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+            color: var(--neu-text); cursor: pointer; text-align: left; font-weight: 600;
+            display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+        .middle-panel .accordion-content { max-height: 0; overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), padding 0.5s ease;
+            background: var(--neu-base); border-radius: 0 0 12px 12px; padding: 0 1.5rem; }
+        .middle-panel .accordion-content.open { padding: 1rem 1.5rem; max-height: 500px;
+            box-shadow: inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.3) var(--neu-dark),
+                inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.3) var(--neu-light); }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .middle-panel .spinner { width: 48px; height: 48px; border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--neu-accent), transparent);
+            animation: spin 1s linear infinite; position: relative; }
+        .middle-panel .spinner::before { content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
+            background: var(--neu-base); border-radius: 50%; }
+
+        .middle-panel .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .middle-panel .modal.show { display: flex; }
+        .middle-panel .modal-content { background: var(--neu-base); padding: 2rem; border-radius: 16px;
+            box-shadow: calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+                calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+            max-width: 500px; width: 90%; }
+        .middle-panel .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .middle-panel .modal-title { font-size: 1.5rem; font-weight: 600; color: var(--neu-text); }
+        .middle-panel .modal-close { background: none; border: none; font-size: 1.5rem; color: var(--neu-text);
+            cursor: pointer; width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+
+        /* Middle panel modal dark theme support */
+        .middle-panel.modal[data-theme="dark"] {
+            --neu-base: #2c2c2c;
+            --neu-dark: rgba(0, 0, 0, 0.4);
+            --neu-light: rgba(255, 255, 255, 0.05);
+            --neu-text: rgba(255, 255, 255, 0.95);
+            --neu-text-dim: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Calendar */
+        .middle-panel .calendar {
+            background: var(--neu-base);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 10px 10px 20px var(--neu-dark), -10px -10px 20px var(--neu-light);
+        }
+
+        .middle-panel .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--neu-text);
+        }
+
+        .middle-panel .calendar-header button {
+            background: var(--neu-base);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--neu-text);
+            box-shadow: 6px 6px 12px var(--neu-dark), -6px -6px 12px var(--neu-light);
+            transition: all 0.2s;
+        }
+
+        .middle-panel .calendar-header button:active {
+            box-shadow: inset 3px 3px 6px var(--neu-dark), inset -3px -3px 6px var(--neu-light);
+        }
+
+        .middle-panel .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .middle-panel .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--neu-text-dim);
+        }
+
+        .middle-panel .calendar-date {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--neu-base);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            box-shadow: 4px 4px 8px var(--neu-dark), -4px -4px 8px var(--neu-light);
+            transition: all 0.2s;
+            color: var(--neu-text);
+        }
+
+        .middle-panel .calendar-date:hover {
+            transform: translateY(-2px);
+            box-shadow: 6px 6px 12px var(--neu-dark), -6px -6px 12px var(--neu-light);
+        }
+
+        .middle-panel .calendar-date.active {
+            background: var(--neu-accent);
+            color: white;
+            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .middle-panel .calendar-date.other-month {
+            opacity: 0.3;
+        }
+
+        /* Date Picker */
+        .middle-panel .date-picker {
+            position: relative;
+        }
+
+        .middle-panel .date-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 12px;
+            color: var(--neu-text);
+            font-size: 1rem;
+            box-shadow: inset 6px 6px 12px var(--neu-dark), inset -6px -6px 12px var(--neu-light);
+            cursor: pointer;
+        }
+
+        .middle-panel .date-picker-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            right: 0;
+            background: var(--neu-base);
+            border-radius: 16px;
+            padding: 1rem;
+            box-shadow: 10px 10px 20px var(--neu-dark), -10px -10px 20px var(--neu-light);
+            z-index: 100;
+            display: none;
+        }
+
+        .middle-panel .date-picker-dropdown.show {
+            display: block;
+        }
+
+        /* Dropdown Single Selection */
+        .middle-panel .dropdown {
+            position: relative;
+        }
+
+        .middle-panel .dropdown-toggle {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--neu-base);
+            border: none;
+            border-radius: 12px;
+            color: var(--neu-text);
+            font-size: 1rem;
+            text-align: left;
+            cursor: pointer;
+            box-shadow: 6px 6px 12px var(--neu-dark), -6px -6px 12px var(--neu-light);
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .middle-panel .dropdown-toggle:active {
+            box-shadow: inset 3px 3px 6px var(--neu-dark), inset -3px -3px 6px var(--neu-light);
+        }
+
+        .middle-panel .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            right: 0;
+            background: var(--neu-base);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: 10px 10px 20px var(--neu-dark), -10px -10px 20px var(--neu-light);
+            z-index: 100;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .middle-panel .dropdown-menu.show {
+            display: block;
+        }
+
+        .middle-panel .dropdown-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            color: var(--neu-text);
+        }
+
+        .middle-panel .dropdown-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .middle-panel .dropdown-item.selected {
+            background: var(--neu-accent);
+            color: white;
+        }
+
+        /* Dropdown Multiple Selection */
+        .middle-panel .dropdown-multi .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .middle-panel .dropdown-multi .dropdown-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Live Time Display - Avalonia Style */
+        .middle-panel .live-time {
+            background: var(--neu-base);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow:
+                10px 10px 20px var(--neu-dark),
+                -10px -10px 20px var(--neu-light);
+            text-align: center;
+        }
+
+        .middle-panel .live-time-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--neu-text-dim);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .middle-panel .live-time-display {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--neu-text);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.05em;
+        }
+
+        .middle-panel .live-time-seconds {
+            color: var(--neu-accent);
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- LEFT PANEL: Neumorphism.Avalonia Style -->
+        <div class="left-panel" data-theme="light">
+            <div class="panel-header">
+                <h1 class="panel-title">Neumorphism.Avalonia</h1>
+                <button class="theme-btn" onclick="toggleLeft()">
+                    <span id="left-label">🌙 Dark Mode</span>
+                </button>
+            </div>
+
+            <!-- Buttons -->
+            <div class="section">
+                <h2 class="section-title">🔘 Buttons</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Standard Button</div>
+                    <button class="btn">Click Me</button>
+                </div>
+                <div class="component-wrapper">
+                    <div class="button-group">
+                        <button class="btn btn-primary">Primary</button>
+                        <button class="btn btn-secondary">Secondary</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms -->
+            <div class="section">
+                <h2 class="section-title">📝 Form Elements</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Text Input</div>
+                    <input type="text" class="input" placeholder="Enter text...">
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Email Input</div>
+                    <input type="email" class="input" placeholder="user@example.com">
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Password Input</div>
+                    <input type="password" class="input" placeholder="••••••••">
+                </div>
+            </div>
+
+            <!-- Checkboxes & Radios -->
+            <div class="section">
+                <h2 class="section-title">☑️ Selection Controls</h2>
+                <div class="component-label">Checkboxes</div>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox" checked>
+                    <span>Option 1 (checked)</span>
+                </label>
+                <label class="checkbox-wrapper">
+                    <input type="checkbox" class="checkbox">
+                    <span>Option 2</span>
+                </label>
+                <div class="component-label" style="margin-top: 1rem;">Radio Buttons</div>
+                <label class="checkbox-wrapper">
+                    <input type="radio" name="left-radio" class="radio" checked>
+                    <span>Choice A (selected)</span>
+                </label>
+                <label class="checkbox-wrapper">
+                    <input type="radio" name="left-radio" class="radio">
+                    <span>Choice B</span>
+                </label>
+            </div>
+
+            <!-- Toggle & Slider -->
+            <div class="section">
+                <h2 class="section-title">🎚️ Controls</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Toggle Switch</div>
+                    <div class="toggle-wrapper">
+                        <span>Enable notifications</span>
+                        <input type="checkbox" class="toggle" checked>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Slider</div>
+                    <input type="range" class="slider" min="0" max="100" value="60">
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="section">
+                <h2 class="section-title">📊 Progress</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Progress Bar (65%)</div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="section">
+                <h2 class="section-title">🃏 Card</h2>
+                <div class="card">
+                    <h3>Card Title</h3>
+                    <p>This is a neumorphic card with classic raised styling and shadow effects.</p>
+                </div>
+            </div>
+
+            <!-- Extended Forms -->
+            <div class="section">
+                <h2 class="section-title">📋 Extended Forms</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Textarea</div>
+                    <textarea class="textarea" placeholder="Enter your message..."></textarea>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Dropdown Select</div>
+                    <select class="select">
+                        <option>Choose an option...</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Icon Buttons -->
+            <div class="section">
+                <h2 class="section-title">⚡ Icon Buttons</h2>
+                <div class="button-group">
+                    <button class="icon-btn">❤️</button>
+                    <button class="icon-btn">⭐</button>
+                    <button class="icon-btn">🔔</button>
+                    <button class="icon-btn">⚙️</button>
+                    <button class="icon-btn">🔍</button>
+                </div>
+            </div>
+
+            <!-- Alerts & Badges -->
+            <div class="section">
+                <h2 class="section-title">💬 Feedback</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Badges</div>
+                    <div class="button-group">
+                        <span class="badge">Default</span>
+                        <span class="badge success">Success</span>
+                        <span class="badge warning">Warning</span>
+                        <span class="badge danger">Danger</span>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Alerts</div>
+                    <div class="alert info">ℹ️ This is an info alert message</div>
+                    <div class="alert success">✅ Success! Your action was completed</div>
+                    <div class="alert warning">⚠️ Warning: Please review this action</div>
+                    <div class="alert error">❌ Error: Something went wrong</div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="section">
+                <h2 class="section-title">🧭 Navigation</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Tabs</div>
+                    <div class="tabs">
+                        <button class="tab active">Dashboard</button>
+                        <button class="tab">Profile</button>
+                        <button class="tab">Settings</button>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Breadcrumbs</div>
+                    <div class="breadcrumbs">
+                        <a href="#" class="breadcrumb-item">Home</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <a href="#" class="breadcrumb-item">Products</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-item active">Details</span>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Pagination</div>
+                    <div class="pagination">
+                        <button class="page-btn">←</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">→</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Display -->
+            <div class="section">
+                <h2 class="section-title">📄 Content Display</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Avatars</div>
+                    <div class="button-group">
+                        <div class="avatar sm">JD</div>
+                        <div class="avatar">AS</div>
+                        <div class="avatar lg">MK</div>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">List</div>
+                    <ul class="list">
+                        <li class="list-item">First list item with neumorphic style</li>
+                        <li class="list-item">Second list item</li>
+                        <li class="list-item">Third list item</li>
+                    </ul>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Table</div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Item 1</td>
+                                <td>Active</td>
+                                <td>Edit</td>
+                            </tr>
+                            <tr>
+                                <td>Item 2</td>
+                                <td>Pending</td>
+                                <td>Review</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Accordion</div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion('left-acc1')">
+                            Section 1
+                            <span>▼</span>
+                        </button>
+                        <div class="accordion-content" id="left-acc1">
+                            This is the content of section 1. It can contain any content you need.
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion('left-acc2')">
+                            Section 2
+                            <span>▼</span>
+                        </button>
+                        <div class="accordion-content" id="left-acc2">
+                            This is the content of section 2 with additional information.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading States -->
+            <div class="section">
+                <h2 class="section-title">⏳ Loading</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Spinner</div>
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- Modal Trigger -->
+            <div class="section">
+                <h2 class="section-title">🪟 Modal</h2>
+                <div class="component-wrapper">
+                    <button class="btn" onclick="openModal('left')">Open Modal</button>
+                </div>
+            </div>
+
+            <!-- Calendar -->
+            <div class="section">
+                <h2 class="section-title">📅 Calendar</h2>
+                <div class="component-wrapper">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <button>‹</button>
+                            <span>October 2025</span>
+                            <button>›</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day">Su</div>
+                            <div class="calendar-day">Mo</div>
+                            <div class="calendar-day">Tu</div>
+                            <div class="calendar-day">We</div>
+                            <div class="calendar-day">Th</div>
+                            <div class="calendar-day">Fr</div>
+                            <div class="calendar-day">Sa</div>
+                            <div class="calendar-date other-month">28</div>
+                            <div class="calendar-date other-month">29</div>
+                            <div class="calendar-date other-month">30</div>
+                            <div class="calendar-date">1</div>
+                            <div class="calendar-date">2</div>
+                            <div class="calendar-date">3</div>
+                            <div class="calendar-date">4</div>
+                            <div class="calendar-date">5</div>
+                            <div class="calendar-date">6</div>
+                            <div class="calendar-date">7</div>
+                            <div class="calendar-date">8</div>
+                            <div class="calendar-date">9</div>
+                            <div class="calendar-date">10</div>
+                            <div class="calendar-date">11</div>
+                            <div class="calendar-date">12</div>
+                            <div class="calendar-date">13</div>
+                            <div class="calendar-date">14</div>
+                            <div class="calendar-date active">15</div>
+                            <div class="calendar-date">16</div>
+                            <div class="calendar-date">17</div>
+                            <div class="calendar-date">18</div>
+                            <div class="calendar-date">19</div>
+                            <div class="calendar-date">20</div>
+                            <div class="calendar-date">21</div>
+                            <div class="calendar-date">22</div>
+                            <div class="calendar-date">23</div>
+                            <div class="calendar-date">24</div>
+                            <div class="calendar-date">25</div>
+                            <div class="calendar-date">26</div>
+                            <div class="calendar-date">27</div>
+                            <div class="calendar-date">28</div>
+                            <div class="calendar-date">29</div>
+                            <div class="calendar-date">30</div>
+                            <div class="calendar-date">31</div>
+                            <div class="calendar-date other-month">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Picker -->
+            <div class="section">
+                <h2 class="section-title">📆 Date Picker</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Date</div>
+                    <div class="date-picker">
+                        <input type="text" class="date-input" value="October 15, 2025" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown Single Selection -->
+            <div class="section">
+                <h2 class="section-title">▼ Dropdown Single</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Option</div>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" onclick="toggleDropdown('left-dropdown-single')">
+                            <span>Choose an option...</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="dropdown-menu" id="left-dropdown-single">
+                            <div class="dropdown-item">Option 1</div>
+                            <div class="dropdown-item selected">Option 2 (Selected)</div>
+                            <div class="dropdown-item">Option 3</div>
+                            <div class="dropdown-item">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown Multiple Selection -->
+            <div class="section">
+                <h2 class="section-title">☑️ Dropdown Multiple</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Multiple</div>
+                    <div class="dropdown dropdown-multi">
+                        <button class="dropdown-toggle" onclick="toggleDropdown('left-dropdown-multi')">
+                            <span>Select items...</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="dropdown-menu" id="left-dropdown-multi">
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="left-multi-1" checked>
+                                    <label for="left-multi-1" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 1</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="left-multi-2">
+                                    <label for="left-multi-2" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 2</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="left-multi-3" checked>
+                                    <label for="left-multi-3" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 3</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="left-multi-4">
+                                    <label for="left-multi-4" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Time Display -->
+            <div class="section">
+                <h2 class="section-title">⏰ Live Time</h2>
+                <div class="component-wrapper">
+                    <div class="live-time">
+                        <div class="live-time-label">Current Time</div>
+                        <div class="live-time-display" id="left-time">--:--:--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MIDDLE PANEL: UI_Design_Update Style -->
+        <div class="middle-panel" data-theme="light">
+            <div class="panel-header">
+                <h1 class="panel-title">UI_Design_Update</h1>
+                <button class="theme-btn" onclick="toggleMiddle()">
+                    <span id="middle-label">🌙 Dark Mode</span>
+                </button>
+            </div>
+
+            <!-- Buttons -->
+            <div class="section">
+                <h2 class="section-title">🔘 Buttons</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Standard Button</div>
+                    <button class="btn">Click Me</button>
+                </div>
+                <div class="component-wrapper">
+                    <div class="button-group">
+                        <button class="btn btn-primary">Primary</button>
+                        <button class="btn btn-success">Success</button>
+                        <button class="btn btn-warning">Warning</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms -->
+            <div class="section">
+                <h2 class="section-title">📝 Form Elements</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Text Input</div>
+                    <input type="text" class="input" placeholder="Enter text...">
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Email Input</div>
+                    <input type="email" class="input" placeholder="user@example.com">
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Password Input</div>
+                    <input type="password" class="input" placeholder="••••••••">
+                </div>
+            </div>
+
+            <!-- Checkboxes & Radios -->
+            <div class="section">
+                <h2 class="section-title">☑️ Selection Controls</h2>
+                <div class="component-label">Checkboxes</div>
+                <div class="checkbox-wrapper">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="middle-check1" class="checkbox" checked>
+                        <label for="middle-check1" class="checkbox-label"></label>
+                    </div>
+                    <span>Option 1 (checked)</span>
+                </div>
+                <div class="checkbox-wrapper">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="middle-check2" class="checkbox">
+                        <label for="middle-check2" class="checkbox-label"></label>
+                    </div>
+                    <span>Option 2</span>
+                </div>
+                <div class="component-label" style="margin-top: 1rem;">Radio Buttons</div>
+                <div class="radio-wrapper">
+                    <div class="radio-container">
+                        <input type="radio" id="middle-radio1" name="middle-radio" class="radio" checked>
+                        <label for="middle-radio1" class="radio-label"></label>
+                    </div>
+                    <span>Choice A (selected)</span>
+                </div>
+                <div class="radio-wrapper">
+                    <div class="radio-container">
+                        <input type="radio" id="middle-radio2" name="middle-radio" class="radio">
+                        <label for="middle-radio2" class="radio-label"></label>
+                    </div>
+                    <span>Choice B</span>
+                </div>
+            </div>
+
+            <!-- Toggle & Slider -->
+            <div class="section">
+                <h2 class="section-title">🎚️ Controls</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Toggle Switch</div>
+                    <div class="toggle-wrapper">
+                        <span>Enable notifications</span>
+                        <div class="toggle-container">
+                            <input type="checkbox" id="middle-toggle1" class="toggle" checked>
+                            <label for="middle-toggle1" class="toggle-label"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Slider</div>
+                    <input type="range" class="slider" min="0" max="100" value="60">
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="section">
+                <h2 class="section-title">📊 Progress</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Progress Bar (65%)</div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="section">
+                <h2 class="section-title">🃏 Card</h2>
+                <div class="card">
+                    <h3>Card Title</h3>
+                    <p>This is a neumorphic card with classic raised styling and shadow effects.</p>
+                </div>
+            </div>
+
+            <!-- Extended Forms -->
+            <div class="section">
+                <h2 class="section-title">📋 Extended Forms</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Textarea</div>
+                    <textarea class="textarea" placeholder="Enter your message..."></textarea>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Dropdown Select</div>
+                    <select class="select">
+                        <option>Choose an option...</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Icon Buttons -->
+            <div class="section">
+                <h2 class="section-title">⚡ Icon Buttons</h2>
+                <div class="button-group">
+                    <button class="icon-btn">❤️</button>
+                    <button class="icon-btn">⭐</button>
+                    <button class="icon-btn">🔔</button>
+                    <button class="icon-btn">⚙️</button>
+                    <button class="icon-btn">🔍</button>
+                </div>
+            </div>
+
+            <!-- Alerts & Badges -->
+            <div class="section">
+                <h2 class="section-title">💬 Feedback</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Badges</div>
+                    <div class="button-group">
+                        <span class="badge">Default</span>
+                        <span class="badge success">Success</span>
+                        <span class="badge warning">Warning</span>
+                        <span class="badge danger">Danger</span>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Alerts</div>
+                    <div class="alert info">ℹ️ This is an info alert message</div>
+                    <div class="alert success">✅ Success! Your action was completed</div>
+                    <div class="alert warning">⚠️ Warning: Please review this action</div>
+                    <div class="alert error">❌ Error: Something went wrong</div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="section">
+                <h2 class="section-title">🧭 Navigation</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Tabs</div>
+                    <div class="tabs">
+                        <button class="tab active">Dashboard</button>
+                        <button class="tab">Profile</button>
+                        <button class="tab">Settings</button>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Breadcrumbs</div>
+                    <div class="breadcrumbs">
+                        <a href="#" class="breadcrumb-item">Home</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <a href="#" class="breadcrumb-item">Products</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-item active">Details</span>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Pagination</div>
+                    <div class="pagination">
+                        <button class="page-btn">←</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">→</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Display -->
+            <div class="section">
+                <h2 class="section-title">📄 Content Display</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Avatars</div>
+                    <div class="button-group">
+                        <div class="avatar sm">JD</div>
+                        <div class="avatar">AS</div>
+                        <div class="avatar lg">MK</div>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">List</div>
+                    <ul class="list">
+                        <li class="list-item">First list item with neumorphic style</li>
+                        <li class="list-item">Second list item</li>
+                        <li class="list-item">Third list item</li>
+                    </ul>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Table</div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Item 1</td>
+                                <td>Active</td>
+                                <td>Edit</td>
+                            </tr>
+                            <tr>
+                                <td>Item 2</td>
+                                <td>Pending</td>
+                                <td>Review</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Accordion</div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion('middle-acc1')">
+                            Section 1
+                            <span>▼</span>
+                        </button>
+                        <div class="accordion-content" id="middle-acc1">
+                            This is the content of section 1. It can contain any content you need.
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion('middle-acc2')">
+                            Section 2
+                            <span>▼</span>
+                        </button>
+                        <div class="accordion-content" id="middle-acc2">
+                            This is the content of section 2 with additional information.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading States -->
+            <div class="section">
+                <h2 class="section-title">⏳ Loading</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Spinner</div>
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- Modal Trigger -->
+            <div class="section">
+                <h2 class="section-title">🪟 Modal</h2>
+                <div class="component-wrapper">
+                    <button class="btn" onclick="openModal('middle')">Open Modal</button>
+                </div>
+            </div>
+
+            <!-- Calendar -->
+            <div class="section">
+                <h2 class="section-title">📅 Calendar</h2>
+                <div class="component-wrapper">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <button>‹</button>
+                            <span>October 2025</span>
+                            <button>›</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day">Su</div>
+                            <div class="calendar-day">Mo</div>
+                            <div class="calendar-day">Tu</div>
+                            <div class="calendar-day">We</div>
+                            <div class="calendar-day">Th</div>
+                            <div class="calendar-day">Fr</div>
+                            <div class="calendar-day">Sa</div>
+                            <div class="calendar-date other-month">28</div>
+                            <div class="calendar-date other-month">29</div>
+                            <div class="calendar-date other-month">30</div>
+                            <div class="calendar-date">1</div>
+                            <div class="calendar-date">2</div>
+                            <div class="calendar-date">3</div>
+                            <div class="calendar-date">4</div>
+                            <div class="calendar-date">5</div>
+                            <div class="calendar-date">6</div>
+                            <div class="calendar-date">7</div>
+                            <div class="calendar-date">8</div>
+                            <div class="calendar-date">9</div>
+                            <div class="calendar-date">10</div>
+                            <div class="calendar-date">11</div>
+                            <div class="calendar-date">12</div>
+                            <div class="calendar-date">13</div>
+                            <div class="calendar-date">14</div>
+                            <div class="calendar-date active">15</div>
+                            <div class="calendar-date">16</div>
+                            <div class="calendar-date">17</div>
+                            <div class="calendar-date">18</div>
+                            <div class="calendar-date">19</div>
+                            <div class="calendar-date">20</div>
+                            <div class="calendar-date">21</div>
+                            <div class="calendar-date">22</div>
+                            <div class="calendar-date">23</div>
+                            <div class="calendar-date">24</div>
+                            <div class="calendar-date">25</div>
+                            <div class="calendar-date">26</div>
+                            <div class="calendar-date">27</div>
+                            <div class="calendar-date">28</div>
+                            <div class="calendar-date">29</div>
+                            <div class="calendar-date">30</div>
+                            <div class="calendar-date">31</div>
+                            <div class="calendar-date other-month">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Picker -->
+            <div class="section">
+                <h2 class="section-title">📆 Date Picker</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Date</div>
+                    <div class="date-picker">
+                        <input type="text" class="date-input" value="October 15, 2025" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown Single Selection -->
+            <div class="section">
+                <h2 class="section-title">▼ Dropdown Single</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Option</div>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" onclick="toggleDropdown('middle-dropdown-single')">
+                            <span>Choose an option...</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="dropdown-menu" id="middle-dropdown-single">
+                            <div class="dropdown-item">Option 1</div>
+                            <div class="dropdown-item selected">Option 2 (Selected)</div>
+                            <div class="dropdown-item">Option 3</div>
+                            <div class="dropdown-item">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown Multiple Selection -->
+            <div class="section">
+                <h2 class="section-title">☑️ Dropdown Multiple</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Multiple</div>
+                    <div class="dropdown dropdown-multi">
+                        <button class="dropdown-toggle" onclick="toggleDropdown('middle-dropdown-multi')">
+                            <span>Select items...</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="dropdown-menu" id="middle-dropdown-multi">
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="middle-multi-1" checked>
+                                    <label for="middle-multi-1" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 1</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="middle-multi-2">
+                                    <label for="middle-multi-2" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 2</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="middle-multi-3" checked>
+                                    <label for="middle-multi-3" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 3</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="middle-multi-4">
+                                    <label for="middle-multi-4" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Time Display -->
+            <div class="section">
+                <h2 class="section-title">⏰ Live Time</h2>
+                <div class="component-wrapper">
+                    <div class="live-time">
+                        <div class="live-time-label">Current Time</div>
+                        <div class="live-time-display" id="middle-time">--:--:--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: UI_Design Neumorphic Style -->
+        <div class="right-panel" data-theme="dark">
+            <div class="panel-header">
+                <h1 class="panel-title">UI_Design Neumorphic</h1>
+                <button class="theme-btn" onclick="toggleRight()">
+                    <span id="right-label">☀️ Light Mode</span>
+                </button>
+            </div>
+
+            <!-- Buttons -->
+            <div class="section">
+                <h2 class="section-title">🔘 Buttons</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Standard Button</div>
+                    <button class="btn">Click Me</button>
+                </div>
+                <div class="component-wrapper">
+                    <div class="button-group">
+                        <button class="btn btn-primary">Primary</button>
+                        <button class="btn btn-success">Success</button>
+                        <button class="btn btn-warning">Warning</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms -->
+            <div class="section">
+                <h2 class="section-title">📝 Form Elements</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Text Input</div>
+                    <input type="text" class="input" placeholder="Enter text...">
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Email Input</div>
+                    <input type="email" class="input" placeholder="user@example.com">
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Password Input</div>
+                    <input type="password" class="input" placeholder="••••••••">
+                </div>
+            </div>
+
+            <!-- Checkboxes & Radios -->
+            <div class="section">
+                <h2 class="section-title">☑️ Selection Controls</h2>
+                <div class="component-label">Checkboxes</div>
+                <div class="checkbox-wrapper">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="check-r1" class="checkbox" checked>
+                        <label for="check-r1" class="checkbox-label"></label>
+                    </div>
+                    <span>Option 1 (checked)</span>
+                </div>
+                <div class="checkbox-wrapper">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="check-r2" class="checkbox">
+                        <label for="check-r2" class="checkbox-label"></label>
+                    </div>
+                    <span>Option 2</span>
+                </div>
+                <div class="component-label" style="margin-top: 1rem;">Radio Buttons</div>
+                <div class="radio-wrapper">
+                    <div class="radio-container">
+                        <input type="radio" id="radio-r1" name="right-radio" class="radio" checked>
+                        <label for="radio-r1" class="radio-label"></label>
+                    </div>
+                    <span>Choice A (selected)</span>
+                </div>
+                <div class="radio-wrapper">
+                    <div class="radio-container">
+                        <input type="radio" id="radio-r2" name="right-radio" class="radio">
+                        <label for="radio-r2" class="radio-label"></label>
+                    </div>
+                    <span>Choice B</span>
+                </div>
+            </div>
+
+            <!-- Toggle & Slider -->
+            <div class="section">
+                <h2 class="section-title">🎚️ Controls</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Toggle Switch</div>
+                    <div class="toggle-wrapper">
+                        <span>Enable notifications</span>
+                        <div class="toggle-container">
+                            <input type="checkbox" id="toggle-r1" class="toggle" checked>
+                            <label for="toggle-r1" class="toggle-label"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Slider</div>
+                    <input type="range" class="slider" min="0" max="100" value="60">
+                </div>
+            </div>
+
+            <!-- Progress -->
+            <div class="section">
+                <h2 class="section-title">📊 Progress</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Progress Bar (65%)</div>
+                    <div class="progress">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card -->
+            <div class="section">
+                <h2 class="section-title">🃏 Card</h2>
+                <div class="card">
+                    <h3>Card Title</h3>
+                    <p>This is a physics-enhanced neumorphic card with spring-based animations and smooth interactions.</p>
+                </div>
+            </div>
+
+            <!-- Extended Forms -->
+            <div class="section">
+                <h2 class="section-title">📋 Extended Forms</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Textarea</div>
+                    <textarea class="textarea" placeholder="Enter your message..."></textarea>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Dropdown Select</div>
+                    <select class="select">
+                        <option>Choose an option...</option>
+                        <option>Option 1</option>
+                        <option>Option 2</option>
+                        <option>Option 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Icon Buttons -->
+            <div class="section">
+                <h2 class="section-title">⚡ Icon Buttons</h2>
+                <div class="button-group">
+                    <button class="icon-btn">❤️</button>
+                    <button class="icon-btn">⭐</button>
+                    <button class="icon-btn">🔔</button>
+                    <button class="icon-btn">⚙️</button>
+                    <button class="icon-btn">🔍</button>
+                </div>
+            </div>
+
+            <!-- Alerts & Badges -->
+            <div class="section">
+                <h2 class="section-title">💬 Feedback</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Badges</div>
+                    <div class="button-group">
+                        <span class="badge">Default</span>
+                        <span class="badge success">Success</span>
+                        <span class="badge warning">Warning</span>
+                        <span class="badge danger">Danger</span>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Alerts</div>
+                    <div class="alert info">ℹ️ This is an info alert message</div>
+                    <div class="alert success">✅ Success! Your action was completed</div>
+                    <div class="alert warning">⚠️ Warning: Please review this action</div>
+                    <div class="alert error">❌ Error: Something went wrong</div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="section">
+                <h2 class="section-title">🧭 Navigation</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Tabs</div>
+                    <div class="tabs">
+                        <button class="tab active">Dashboard</button>
+                        <button class="tab">Profile</button>
+                        <button class="tab">Settings</button>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Breadcrumbs</div>
+                    <div class="breadcrumbs">
+                        <a href="#" class="breadcrumb-item">Home</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <a href="#" class="breadcrumb-item">Products</a>
+                        <span class="breadcrumb-separator">/</span>
+                        <span class="breadcrumb-item active">Details</span>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Pagination</div>
+                    <div class="pagination">
+                        <button class="page-btn">←</button>
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn">→</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Display -->
+            <div class="section">
+                <h2 class="section-title">📄 Content Display</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Avatars</div>
+                    <div class="button-group">
+                        <div class="avatar sm">JD</div>
+                        <div class="avatar">AS</div>
+                        <div class="avatar lg">MK</div>
+                    </div>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">List</div>
+                    <ul class="list">
+                        <li class="list-item">First list item with neumorphic style</li>
+                        <li class="list-item">Second list item</li>
+                        <li class="list-item">Third list item</li>
+                    </ul>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Table</div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Item 1</td>
+                                <td>Active</td>
+                                <td>Edit</td>
+                            </tr>
+                            <tr>
+                                <td>Item 2</td>
+                                <td>Pending</td>
+                                <td>Review</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="component-wrapper">
+                    <div class="component-label">Accordion</div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion('right-acc1')">
+                            Section 1
+                            <span>▼</span>
+                        </button>
+                        <div class="accordion-content" id="right-acc1">
+                            This is the content of section 1. It can contain any content you need.
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header" onclick="toggleAccordion('right-acc2')">
+                            Section 2
+                            <span>▼</span>
+                        </button>
+                        <div class="accordion-content" id="right-acc2">
+                            This is the content of section 2 with additional information.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading States -->
+            <div class="section">
+                <h2 class="section-title">⏳ Loading</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Spinner</div>
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- Modal Trigger -->
+            <div class="section">
+                <h2 class="section-title">🪟 Modal</h2>
+                <div class="component-wrapper">
+                    <button class="btn" onclick="openModal('right')">Open Modal</button>
+                </div>
+            </div>
+
+            <!-- Calendar -->
+            <div class="section">
+                <h2 class="section-title">📅 Calendar</h2>
+                <div class="component-wrapper">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <button>‹</button>
+                            <span>October 2025</span>
+                            <button>›</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-day">Su</div>
+                            <div class="calendar-day">Mo</div>
+                            <div class="calendar-day">Tu</div>
+                            <div class="calendar-day">We</div>
+                            <div class="calendar-day">Th</div>
+                            <div class="calendar-day">Fr</div>
+                            <div class="calendar-day">Sa</div>
+                            <div class="calendar-date other-month">28</div>
+                            <div class="calendar-date other-month">29</div>
+                            <div class="calendar-date other-month">30</div>
+                            <div class="calendar-date">1</div>
+                            <div class="calendar-date">2</div>
+                            <div class="calendar-date">3</div>
+                            <div class="calendar-date">4</div>
+                            <div class="calendar-date">5</div>
+                            <div class="calendar-date">6</div>
+                            <div class="calendar-date">7</div>
+                            <div class="calendar-date">8</div>
+                            <div class="calendar-date">9</div>
+                            <div class="calendar-date">10</div>
+                            <div class="calendar-date">11</div>
+                            <div class="calendar-date">12</div>
+                            <div class="calendar-date">13</div>
+                            <div class="calendar-date">14</div>
+                            <div class="calendar-date active">15</div>
+                            <div class="calendar-date">16</div>
+                            <div class="calendar-date">17</div>
+                            <div class="calendar-date">18</div>
+                            <div class="calendar-date">19</div>
+                            <div class="calendar-date">20</div>
+                            <div class="calendar-date">21</div>
+                            <div class="calendar-date">22</div>
+                            <div class="calendar-date">23</div>
+                            <div class="calendar-date">24</div>
+                            <div class="calendar-date">25</div>
+                            <div class="calendar-date">26</div>
+                            <div class="calendar-date">27</div>
+                            <div class="calendar-date">28</div>
+                            <div class="calendar-date">29</div>
+                            <div class="calendar-date">30</div>
+                            <div class="calendar-date">31</div>
+                            <div class="calendar-date other-month">1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Picker -->
+            <div class="section">
+                <h2 class="section-title">📆 Date Picker</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Date</div>
+                    <div class="date-picker">
+                        <input type="text" class="date-input" value="October 15, 2025" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown Single Selection -->
+            <div class="section">
+                <h2 class="section-title">▼ Dropdown Single</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Option</div>
+                    <div class="dropdown">
+                        <button class="dropdown-toggle" onclick="toggleDropdown('right-dropdown-single')">
+                            <span>Choose an option...</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="dropdown-menu" id="right-dropdown-single">
+                            <div class="dropdown-item">Option 1</div>
+                            <div class="dropdown-item selected">Option 2 (Selected)</div>
+                            <div class="dropdown-item">Option 3</div>
+                            <div class="dropdown-item">Option 4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dropdown Multiple Selection -->
+            <div class="section">
+                <h2 class="section-title">☑️ Dropdown Multiple</h2>
+                <div class="component-wrapper">
+                    <div class="component-label">Select Multiple</div>
+                    <div class="dropdown dropdown-multi">
+                        <button class="dropdown-toggle" onclick="toggleDropdown('right-dropdown-multi')">
+                            <span>Select items...</span>
+                            <span>▼</span>
+                        </button>
+                        <div class="dropdown-menu" id="right-dropdown-multi">
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="right-multi-1" checked>
+                                    <label for="right-multi-1" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 1</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="right-multi-2">
+                                    <label for="right-multi-2" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 2</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="right-multi-3" checked>
+                                    <label for="right-multi-3" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 3</span>
+                            </div>
+                            <div class="dropdown-item">
+                                <div class="dropdown-checkbox-container">
+                                    <input type="checkbox" id="right-multi-4">
+                                    <label for="right-multi-4" class="dropdown-checkbox-label"></label>
+                                </div>
+                                <span>Item 4</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Time Display -->
+            <div class="section">
+                <h2 class="section-title">⏰ Live Time</h2>
+                <div class="component-wrapper">
+                    <div class="live-time">
+                        <div class="live-time-label">Current Time</div>
+                        <div class="live-time-display" id="right-time">--:--:--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Components -->
+    <div class="left-panel modal" id="left-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal('left')">×</button>
+            </div>
+            <p>This is a modal dialog with neumorphic styling. You can put any content here.</p>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                <button class="btn btn-primary" onclick="closeModal('left')">Confirm</button>
+                <button class="btn" onclick="closeModal('left')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="middle-panel modal" id="middle-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal('middle')">×</button>
+            </div>
+            <p>This is a modal dialog with neumorphic styling. You can put any content here.</p>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                <button class="btn btn-primary" onclick="closeModal('middle')">Confirm</button>
+                <button class="btn" onclick="closeModal('middle')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-panel modal" id="right-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal('right')">×</button>
+            </div>
+            <p>This is a modal dialog with neumorphic styling. You can put any content here.</p>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                <button class="btn btn-primary" onclick="closeModal('right')">Confirm</button>
+                <button class="btn" onclick="closeModal('right')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleLeft() {
+            const panel = document.querySelector('.left-panel');
+            const label = document.getElementById('left-label');
+            const theme = panel.getAttribute('data-theme');
+
+            if (theme === 'light') {
+                panel.setAttribute('data-theme', 'dark');
+                label.textContent = '☀️ Light Mode';
+            } else {
+                panel.setAttribute('data-theme', 'light');
+                label.textContent = '🌙 Dark Mode';
+            }
+        }
+
+        function toggleRight() {
+            const panel = document.querySelector('.right-panel');
+            const label = document.getElementById('right-label');
+            const theme = panel.getAttribute('data-theme');
+
+            if (theme === 'dark') {
+                panel.setAttribute('data-theme', 'light');
+                label.textContent = '🌙 Dark Mode';
+            } else {
+                panel.setAttribute('data-theme', 'dark');
+                label.textContent = '☀️ Light Mode';
+            }
+        }
+
+        function toggleMiddle() {
+            const panel = document.querySelector('.middle-panel:not(.modal)');
+            const modal = document.getElementById('middle-modal');
+            const label = document.getElementById('middle-label');
+            const theme = panel.getAttribute('data-theme');
+
+            if (theme === 'light') {
+                panel.setAttribute('data-theme', 'dark');
+                modal.setAttribute('data-theme', 'dark');
+                label.textContent = '☀️ Light Mode';
+            } else {
+                panel.setAttribute('data-theme', 'light');
+                modal.setAttribute('data-theme', 'light');
+                label.textContent = '🌙 Dark Mode';
+            }
+        }
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('open');
+        }
+
+        function openModal(side) {
+            const modal = document.getElementById(side + '-modal');
+            modal.classList.add('show');
+        }
+
+        function closeModal(side) {
+            const modal = document.getElementById(side + '-modal');
+            modal.classList.remove('show');
+        }
+
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(function(menu) {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+
+        // Close modal when clicking outside the modal content
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+            }
+        });
+
+        // Live Time Update Function
+        function updateLiveTime() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hours}:${minutes}:<span class="live-time-seconds">${seconds}</span>`;
+
+            document.getElementById('left-time').innerHTML = timeString;
+            document.getElementById('middle-time').innerHTML = timeString;
+            document.getElementById('right-time').innerHTML = timeString;
+        }
+
+        // Initialize live time and update every second
+        updateLiveTime();
+        setInterval(updateLiveTime, 1000);
+
+        // Highlight current date in calendars
+        function highlightCurrentDate() {
+            const now = new Date();
+            const currentDate = now.getDate();
+
+            // Find all calendar dates in all panels
+            document.querySelectorAll('.calendar-date').forEach(date => {
+                const dateNum = parseInt(date.textContent);
+                if (dateNum === currentDate) {
+                    date.classList.add('today');
+                }
+            });
+        }
+
+        // Initialize current date highlighting
+        highlightCurrentDate();
+
+        // Date Picker functionality
+        function toggleDatePicker(id) {
+            const dropdown = document.getElementById(id + '-dropdown');
+            if (dropdown) {
+                dropdown.classList.toggle('show');
+            }
+        }
+
+        // Close date picker when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.date-picker')) {
+                document.querySelectorAll('.date-picker-dropdown').forEach(function(dropdown) {
+                    dropdown.classList.remove('show');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

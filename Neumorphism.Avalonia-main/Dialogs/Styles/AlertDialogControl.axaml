@@ -1,0 +1,158 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModels="clr-namespace:Avalonia.Themes.Neumorphism.Dialogs.ViewModels" 
+        xmlns:controls="clr-namespace:Avalonia.Themes.Neumorphism.Dialogs.Controls"
+        xmlns:controls2="clr-namespace:Avalonia.Themes.Neumorphism.Controls"
+        xmlns:assist="clr-namespace:Avalonia.Themes.Neumorphism.Assist"
+        xmlns:naming="clr-namespace:Avalonia.Themes.Neumorphism.Resources.Naming">
+  
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Avalonia.Themes.Neumorphism/Dialogs/Resources/TemplateResources.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+
+
+
+    <Style Selector="controls|AlertDialogControl" x:DataType="viewModels:AlertDialogViewModel">
+        <Setter Property="CornerRadius" Value="20"/>
+        <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Name="PART_RootBorder" CornerRadius="{TemplateBinding CornerRadius}" Background="{TemplateBinding Background}">
+                  <Border.BoxShadow>
+                        <MultiBinding Converter="{StaticResource AutoBoxShadowsConverter}">
+                          <CompiledBinding Path="Height" RelativeSource="{RelativeSource TemplatedParent}"/>
+                          <DynamicResource ResourceKey="MaterialDesignShadowLight" />
+                          <DynamicResource ResourceKey="MaterialDesignShadowDark" />
+                          <CompiledBinding Path="DialogShadowKind"/>
+                        </MultiBinding>
+                  </Border.BoxShadow>
+                    <DockPanel Name="PART_RootPanel"
+                               Width="{CompiledBinding Width}"
+                               MaxWidth="{CompiledBinding MaxWidth}">
+                      
+                        <DockPanel Name="{x:Static naming:PartNames.PartHeaderPanel}">
+
+                          <Button Theme="{StaticResource ButtonIcon}" Width="90" Height="90" IsHitTestVisible="False"
+                                  Focusable="False"
+                                  HorizontalContentAlignment="Center"
+                                  VerticalContentAlignment="Center">
+
+                            <ContentPresenter Name="{x:Static naming:PartNames.PartHeaderIcon}"
+                                              Content="{CompiledBinding DialogIcon}"
+                                              ContentTemplate="{StaticResource DialogHeaderIconTemplateIcon}"
+                                              IsVisible="{CompiledBinding !!DialogIcon}"/>
+
+
+                          </Button>
+               
+
+                          <StackPanel Orientation="Vertical">
+                            <TextBlock Name="{x:Static naming:PartNames.PartHeaderText}" Foreground="{DynamicResource MaterialDesignDarkGray}"
+                                       Classes="Headline5" Margin="20,15,0,0" TextWrapping="Wrap"
+                                       IsVisible="{CompiledBinding !!ContentHeader.Length}"
+                                       Text="{CompiledBinding ContentHeader}" />
+
+                            <ContentPresenter Name="PART_ContentPresenter" Margin="20,10,0,0" TextWrapping="Wrap"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" />
+                          </StackPanel>
+                        </DockPanel>
+
+                        
+                          <controls2:ColorZone VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,15,0,0"
+                            assist:ShadowAssist.ShadowDepth="Depth5" Padding="0"
+                            Mode="Standard" Background="Transparent">
+
+                            <DockPanel Name="{x:Static naming:PartNames.PartButtonsPanel}" Margin="0">
+                              
+                            <ItemsControl Name="{x:Static naming:PartNames.PartLeftButtonPlacement}" IsVisible="{CompiledBinding !!LeftDialogButtons.Count}"
+                                          DockPanel.Dock="Left" HorizontalAlignment="Left"
+                                          ItemsSource="{CompiledBinding LeftDialogButtons}"
+                                          ItemTemplate="{StaticResource DialogButtonTemplate}"
+                                          ItemsPanel="{StaticResource DialogButtonPlacementPanel}" />
+
+                            <ItemsControl Name="{x:Static naming:PartNames.PartCenterButtonPlacement}" IsVisible="{CompiledBinding !!CenterDialogButtons.Count}"
+                                          DockPanel.Dock="Bottom" HorizontalAlignment="Center"
+                                          ItemsSource="{CompiledBinding CenterDialogButtons}"
+                                          ItemTemplate="{StaticResource DialogButtonTemplate}"
+                                          ItemsPanel="{StaticResource DialogButtonPlacementPanel}" />
+
+                            <ItemsControl Name="{x:Static naming:PartNames.PartRightButtonPlacement}" IsVisible="{CompiledBinding !!RightDialogButtons.Count}"
+                                          DockPanel.Dock="Right" HorizontalAlignment="Right"
+                                          ItemsSource="{CompiledBinding RightDialogButtons}"
+                                          ItemTemplate="{StaticResource DialogButtonTemplate}"
+                                          ItemsPanel="{StaticResource DialogButtonPlacementPanel}" />
+
+                            </DockPanel>
+                          </controls2:ColorZone>
+                        
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="controls|AlertDialogControl[CornerRadius=0] /template/ Border#PART_RootBorder">
+      <Setter Property="CornerRadius" Value="{TemplateBinding Height, Converter={StaticResource ControlHeightToCornerRadiusConverter}, ConverterParameter=0}"/>
+    </Style>
+  
+    
+    <Style Selector="controls|AlertDialogControl /template/ Border#PART_RootBorder">
+        <Setter Property="assist:ShadowAssist.ShadowDepth" Value="CenterDepth3"/>
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="Margin" Value="32"/>
+    </Style>
+    
+    <Style Selector="controls|AlertDialogControl /template/ DockPanel#PART_HeaderPanel">
+        <Setter Property="Margin" Value="24,24,24,14"/>
+        <Setter Property="Dock" Value="Top"/>
+    </Style>
+    
+    <Style Selector="controls|AlertDialogControl /template/ ContentPresenter#PART_HeaderIcon">
+        <Setter Property="Width" Value="68"/>
+        <Setter Property="Height" Value="68"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+    
+    <Style Selector="controls|AlertDialogControl /template/ TextBlock#PART_HeaderText">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style Selector="controls|AlertDialogControl /template/ DockPanel#PART_ButtonsPanel">
+        <Setter Property="Margin" Value="4,16,4,4"/>
+        <Setter Property="Dock" Value="Bottom"/>
+    </Style>
+    
+    <Style Selector="controls|AlertDialogControl /template/ ItemsControl#PART_RightButtonPlacement">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+    
+    <Style Selector="controls|AlertDialogControl /template/ ItemsControl#PART_RightButtonPlacement Button,
+                     controls|AlertDialogControl /template/ ItemsControl#PART_LeftButtonPlacement Button">
+        <Setter Property="Margin" Value="4"/>
+    </Style>
+    
+    <Style Selector="controls|AlertDialogControl /template/ ItemsControl#PART_LeftButtonPlacement ItemsPresenter">
+        <Setter Property="(KeyboardNavigation.TabNavigation)" Value="Continue" />
+    </Style>
+    
+    <Style Selector="controls|AlertDialogControl /template/ ItemsControl#PART_RightButtonPlacement ItemsPresenter">
+        <Setter Property="(KeyboardNavigation.TabNavigation)" Value="Continue" />
+    </Style>
+    
+    
+    <Style Selector="controls|AlertDialogControl > ScrollViewer#PART_ScrollViewer > StackPanel#PART_ContentPanel > TextBlock#PART_SupportingText">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+    
+    <!-- Origin contribution by dojo90
+         https://github.com/AvaloniaCommunity/Material.Avalonia/pull/147 -->
+    <Style Selector="controls|AlertDialogControl > ScrollViewer#PART_ScrollViewer > StackPanel#PART_ContentPanel > ItemsControl#PART_TextFields ItemsPresenter">
+        <Setter Property="(KeyboardNavigation.TabNavigation)" Value="Continue" />
+    </Style>
+</Styles>

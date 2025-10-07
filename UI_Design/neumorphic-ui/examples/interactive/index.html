@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neumorphic UI - Interactive Showcase</title>
+    <link rel="stylesheet" href="../../neumorphic-ui.css">
+    <link rel="stylesheet" href="./showcase-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Performance Monitor -->
+    <div id="fpsDisplay" class="fps-counter" style="display: none;">60 FPS</div>
+
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2 class="sidebar-title">🌚 Neumorphic UI</h2>
+            <div class="theme-switch">
+                <input type="checkbox" id="themeToggle" class="neu-toggle-input">
+                <label for="themeToggle" class="neu-toggle-label"></label>
+                <span class="theme-label">Light</span>
+            </div>
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="#hero" class="nav-link active">🏠 Home</a></li>
+            <li><a href="#buttons" class="nav-link">🔘 Buttons</a></li>
+            <li><a href="#forms" class="nav-link">📝 Forms</a></li>
+            <li><a href="#cards" class="nav-link">🃏 Cards</a></li>
+            <li><a href="#physics" class="nav-link">⚡ Physics</a></li>
+            <li><a href="#customizer" class="nav-link">🎨 Customizer</a></li>
+            <li><a href="#performance" class="nav-link">📊 Performance</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <button class="neu-btn neu-btn--small" id="generateCode">Generate Code</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-main">Neumorphic UI</span>
+                    <span class="title-sub">Interactive Showcase</span>
+                </h1>
+                <p class="hero-description">
+                    Experience physics-based neumorphic design with mathematical precision.
+                    Real-time customization, interactive components, and performance monitoring.
+                </p>
+                <div class="hero-actions">
+                    <button class="neu-btn neu-btn--large neu-btn--primary demo-btn physics-lift">
+                        Explore Components
+                    </button>
+                    <button class="neu-btn neu-btn--large demo-btn spring-bounce">
+                        View Documentation
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="floating-elements">
+                    <div class="float-card neu-card physics-float">
+                        <div class="neu-avatar">🎨</div>
+                        <h4>Design</h4>
+                    </div>
+                    <div class="float-card neu-card physics-float" style="animation-delay: -1s;">
+                        <div class="neu-avatar">⚡</div>
+                        <h4>Physics</h4>
+                    </div>
+                    <div class="float-card neu-card physics-float" style="animation-delay: -2s;">
+                        <div class="neu-avatar">🔧</div>
+                        <h4>Code</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Button Playground -->
+        <section id="buttons" class="demo-section">
+            <div class="section-header">
+                <h2 class="section-title">🔘 Button Playground</h2>
+                <p class="section-description">
+                    Interactive buttons with physics-based animations and customizable states.
+                </p>
+                <button class="copy-code-btn neu-btn neu-btn--small">Copy Code</button>
+            </div>
+
+            <div class="demo-grid">
+                <!-- Basic Buttons -->
+                <div class="demo-item neu-card">
+                    <h3 class="demo-title">Basic Buttons</h3>
+                    <div class="button-group">
+                        <button class="neu-btn demo-btn">Default</button>
+                        <button class="neu-btn neu-btn--primary demo-btn">Primary</button>
+                        <button class="neu-btn neu-btn--success demo-btn">Success</button>
+                        <button class="neu-btn neu-btn--warning demo-btn">Warning</button>
+                    </div>
+                    <div class="demo-controls">
+                        <button class="control-btn" onclick="stateSimulator.simulateState(this.parentElement.previousElementSibling.children[0], 'hover')">
+                            Simulate Hover
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Size Variants -->
+                <div class="demo-item neu-card">
+                    <h3 class="demo-title">Size Variants</h3>
+                    <div class="button-group">
+                        <button class="neu-btn neu-btn--small demo-btn">Small</button>
+                        <button class="neu-btn demo-btn">Default</button>
+                        <button class="neu-btn neu-btn--large demo-btn">Large</button>
+                    </div>
+                </div>
+
+                <!-- Icon Buttons -->
+                <div class="demo-item neu-card">
+                    <h3 class="demo-title">Icon Buttons</h3>
+                    <div class="button-group">
+                        <button class="neu-btn neu-btn--icon demo-btn">🔍</button>
+                        <button class="neu-btn neu-btn--icon demo-btn">❤️</button>
+                        <button class="neu-btn neu-btn--icon demo-btn">⚙️</button>
+                        <button class="neu-btn neu-btn--icon demo-btn">📱</button>
+                    </div>
+                </div>
+
+                <!-- Physics Buttons -->
+                <div class="demo-item neu-card">
+                    <h3 class="demo-title">Physics Enhanced</h3>
+                    <div class="button-group">
+                        <button class="neu-btn demo-btn spring-gentle">Gentle</button>
+                        <button class="neu-btn demo-btn spring-bounce">Bouncy</button>
+                        <button class="neu-btn demo-btn physics-lift">Lift</button>
+                        <button class="neu-btn demo-btn physics-ripple">Ripple</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">/* Basic Neumorphic Button */
+.neu-btn {
+    background: var(--neu-base);
+    border: none;
+    border-radius: var(--neu-radius);
+    padding: var(--neu-space-md) var(--neu-space-lg);
+    transition: all 0.3s var(--spring-gentle);
+    box-shadow:
+        calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-light),
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+}</div>
+        </section>
+
+        <!-- Form Laboratory -->
+        <section id="forms" class="demo-section">
+            <div class="section-header">
+                <h2 class="section-title">📝 Form Laboratory</h2>
+                <p class="section-description">
+                    Interactive form elements with validation states and accessibility features.
+                </p>
+                <button class="copy-code-btn neu-btn neu-btn--small">Copy Code</button>
+            </div>
+
+            <div class="demo-grid">
+                <!-- Text Inputs -->
+                <div class="demo-item neu-card">
+                    <h3 class="demo-title">Text Inputs</h3>
+                    <div class="form-demo">
+                        <div class="neu-input-wrapper">
+                            <label class="neu-label">Username</label>
+                            <input type="text" class="neu-input" placeholder="Enter username" value="john_doe">
+                        </div>
+                        <div class="neu-input-wrapper">
+                            <label class="neu-label">Email</label>
+                            <input type="email" class="neu-input" placeholder="your@email.com">
+                        </div>
+                        <div class="neu-input-wrapper">
+                            <label class="neu-label">Password</label>
+                            <input type="password" class="neu-input" placeholder="••••••••">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toggle Controls -->
+                <div class="demo-item neu-card">
+                    <h3 class="demo-title">Toggle Controls</h3>
+                    <div class="form-demo">
+                        <div class="neu-toggle-wrapper">
+                            <span class="text-primary">Dark Mode</span>
+                            <div class="neu-toggle">
+                                <input type="checkbox" id="demo-toggle1" class="neu-toggle-input" checked>
+                                <label for="demo-toggle1" class="neu-toggle-label"></label>
+                            </div>
+                        </div>
+                        <div class="neu-toggle-wrapper">
+                            <span class="text-primary">Notifications</span>
+                            <div class="neu-toggle">
+                                <input type="checkbox" id="demo-toggle2" class="neu-toggle-input">
+                                <label for="demo-toggle2" class="neu-toggle-label"></label>
+                            </div>
+                        </div>
+                        <div class="neu-toggle-wrapper">
+                            <span class="text-primary">Auto-sync</span>
+                            <div class="neu-toggle">
+                                <input type="checkbox" id="demo-toggle3" class="neu-toggle-input" checked>
+                                <label for="demo-toggle3" class="neu-toggle-label"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Checkboxes and Radios -->
+                <div class="demo-item neu-card">
+                    <h3 class="demo-title">Selection Controls</h3>
+                    <div class="form-demo">
+                        <div class="neu-checkbox-wrapper">
+                            <div class="neu-checkbox">
+                                <input type="checkbox" id="demo-check1" class="neu-checkbox-input" checked>
+                                <label for="demo-check1" class="neu-checkbox-label"></label>
+                            </div>
+                            <span class="text-primary">Remember me</span>
+                        </div>
+                        <div class="neu-checkbox-wrapper">
+                            <div class="neu-checkbox">
+                                <input type="checkbox" id="demo-check2" class="neu-checkbox-input">
+                                <label for="demo-check2" class="neu-checkbox-label"></label>
+                            </div>
+                            <span class="text-primary">Subscribe to newsletter</span>
+                        </div>
+
+                        <div class="radio-group">
+                            <div class="neu-radio-wrapper">
+                                <div class="neu-radio">
+                                    <input type="radio" id="demo-radio1" name="plan" class="neu-radio-input" checked>
+                                    <label for="demo-radio1" class="neu-radio-label"></label>
+                                </div>
+                                <span class="text-primary">Basic Plan</span>
+                            </div>
+                            <div class="neu-radio-wrapper">
+                                <div class="neu-radio">
+                                    <input type="radio" id="demo-radio2" name="plan" class="neu-radio-input">
+                                    <label for="demo-radio2" class="neu-radio-label"></label>
+                                </div>
+                                <span class="text-primary">Pro Plan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Validation -->
+                <div class="demo-item neu-card">
+                    <h3 class="demo-title">Validation States</h3>
+                    <div class="form-demo">
+                        <div class="neu-input-wrapper">
+                            <label class="neu-label">Valid Input</label>
+                            <input type="text" class="neu-input valid" value="john@example.com">
+                        </div>
+                        <div class="neu-input-wrapper">
+                            <label class="neu-label">Invalid Input</label>
+                            <input type="email" class="neu-input invalid" value="invalid-email">
+                        </div>
+                        <div class="neu-input-wrapper">
+                            <label class="neu-label">Disabled Input</label>
+                            <input type="text" class="neu-input" disabled value="Disabled field">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">/* Neumorphic Input */
+.neu-input {
+    background: var(--neu-base);
+    border: none;
+    border-radius: var(--neu-radius);
+    padding: var(--neu-space-md);
+    box-shadow:
+        inset var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark),
+        inset calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-light);
+}</div>
+        </section>
+
+        <!-- Card Gallery -->
+        <section id="cards" class="demo-section">
+            <div class="section-header">
+                <h2 class="section-title">🃏 Card Gallery</h2>
+                <p class="section-description">
+                    Content containers with hover effects and interactive elements.
+                </p>
+                <button class="copy-code-btn neu-btn neu-btn--small">Copy Code</button>
+            </div>
+
+            <div class="demo-grid">
+                <!-- Profile Cards -->
+                <div class="demo-item neu-card interactive-card">
+                    <div class="neu-card-header">
+                        <div class="neu-avatar">👨‍💻</div>
+                        <div>
+                            <h3 class="neu-card-title">Alex Johnson</h3>
+                            <p class="neu-card-subtitle">Frontend Developer</p>
+                        </div>
+                    </div>
+                    <div class="neu-card-body">
+                        <p>Passionate about creating beautiful, interactive user interfaces with modern web technologies.</p>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value">127</div>
+                                <div class="stat-label">Projects</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">2.3k</div>
+                                <div class="stat-label">Followers</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="neu-card-actions">
+                        <button class="neu-btn neu-btn--small">Follow</button>
+                        <button class="neu-btn neu-btn--small neu-btn--primary">Message</button>
+                    </div>
+                </div>
+
+                <!-- Project Card -->
+                <div class="demo-item neu-card interactive-card">
+                    <div class="neu-card-header">
+                        <div class="neu-avatar neu-avatar--sm">🎨</div>
+                        <div>
+                            <h3 class="neu-card-title">Design System</h3>
+                            <p class="neu-card-subtitle">In Progress</p>
+                        </div>
+                    </div>
+                    <div class="neu-card-body">
+                        <p>Building a comprehensive neumorphic design system with physics-based interactions.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                        <div class="progress-text">75% Complete</div>
+                    </div>
+                    <div class="neu-card-actions">
+                        <button class="neu-btn neu-btn--small">View Details</button>
+                        <button class="neu-btn neu-btn--small neu-btn--success">Mark Complete</button>
+                    </div>
+                </div>
+
+                <!-- Analytics Card -->
+                <div class="demo-item neu-card interactive-card">
+                    <div class="neu-card-header">
+                        <div class="neu-avatar neu-avatar--sm">📊</div>
+                        <div>
+                            <h3 class="neu-card-title">Weekly Analytics</h3>
+                            <p class="neu-card-subtitle">Last 7 days</p>
+                        </div>
+                    </div>
+                    <div class="neu-card-body">
+                        <div class="analytics-grid">
+                            <div class="metric">
+                                <div class="metric-value">2,847</div>
+                                <div class="metric-label">Users</div>
+                                <div class="metric-change positive">+12%</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">14.2k</div>
+                                <div class="metric-label">Views</div>
+                                <div class="metric-change positive">+8%</div>
+                            </div>
+                            <div class="metric">
+                                <div class="metric-value">3.4%</div>
+                                <div class="metric-label">Bounce Rate</div>
+                                <div class="metric-change negative">+0.2%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="neu-card-actions">
+                        <button class="neu-btn neu-btn--small">View Report</button>
+                    </div>
+                </div>
+
+                <!-- Settings Card -->
+                <div class="demo-item neu-card interactive-card">
+                    <div class="neu-card-header">
+                        <div class="neu-avatar neu-avatar--sm">⚙️</div>
+                        <div>
+                            <h3 class="neu-card-title">Settings</h3>
+                            <p class="neu-card-subtitle">Customize your experience</p>
+                        </div>
+                    </div>
+                    <div class="neu-card-body">
+                        <div class="settings-list">
+                            <div class="setting-item">
+                                <span>Dark Theme</span>
+                                <div class="neu-toggle">
+                                    <input type="checkbox" id="setting-toggle1" class="neu-toggle-input" checked>
+                                    <label for="setting-toggle1" class="neu-toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <span>Animations</span>
+                                <div class="neu-toggle">
+                                    <input type="checkbox" id="setting-toggle2" class="neu-toggle-input" checked>
+                                    <label for="setting-toggle2" class="neu-toggle-label"></label>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <span>Sound Effects</span>
+                                <div class="neu-toggle">
+                                    <input type="checkbox" id="setting-toggle3" class="neu-toggle-input">
+                                    <label for="setting-toggle3" class="neu-toggle-label"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-snippet">/* Interactive Card */
+.neu-card {
+    background: var(--neu-base);
+    border-radius: var(--neu-radius);
+    padding: var(--neu-space-xl);
+    transition: transform 0.5s var(--spring-gentle);
+    box-shadow:
+        calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-light),
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+}</div>
+        </section>
+
+        <!-- Physics Engine -->
+        <section id="physics" class="demo-section">
+            <div class="section-header">
+                <h2 class="section-title">⚡ Physics Engine</h2>
+                <p class="section-description">
+                    Real-time physics parameter adjustment and animation demonstrations.
+                </p>
+            </div>
+
+            <div class="physics-demo">
+                <div class="physics-controls neu-card">
+                    <h3 class="demo-title">Physics Parameters</h3>
+
+                    <div class="control-group">
+                        <label>Shadow Distance: <span id="distanceValue">12px</span></label>
+                        <input type="range" id="distanceSlider" min="4" max="24" value="12" class="neu-slider">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Blur Radius: <span id="blurValue">20px</span></label>
+                        <input type="range" id="blurSlider" min="8" max="40" value="20" class="neu-slider">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Border Radius: <span id="radiusValue">16px</span></label>
+                        <input type="range" id="radiusSlider" min="4" max="32" value="16" class="neu-slider">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Spring Tension: <span id="tensionValue">300</span></label>
+                        <input type="range" id="tensionSlider" min="100" max="500" value="300" class="neu-slider">
+                    </div>
+
+                    <div class="control-group">
+                        <label>Spring Friction: <span id="frictionValue">30</span></label>
+                        <input type="range" id="frictionSlider" min="10" max="60" value="30" class="neu-slider">
+                    </div>
+                </div>
+
+                <div class="physics-preview neu-card">
+                    <h3 class="demo-title">Live Preview</h3>
+                    <div class="preview-area">
+                        <div id="physicsPreview" class="preview-element neu-btn demo-btn">
+                            Interactive Element
+                        </div>
+                    </div>
+                    <div class="physics-info">
+                        <p>Hover and click the element above to see the physics in action!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="animation-demos">
+                <h3 class="demo-title">Animation Demonstrations</h3>
+                <div class="demo-grid">
+                    <div class="animation-item neu-card">
+                        <h4>Spring Bounce</h4>
+                        <button class="neu-btn demo-btn spring-bounce">Click Me</button>
+                    </div>
+                    <div class="animation-item neu-card">
+                        <h4>Physics Lift</h4>
+                        <button class="neu-btn demo-btn physics-lift">Hover Me</button>
+                    </div>
+                    <div class="animation-item neu-card">
+                        <h4>Ripple Effect</h4>
+                        <button class="neu-btn demo-btn physics-ripple">Touch Me</button>
+                    </div>
+                    <div class="animation-item neu-card">
+                        <h4>Energy Burst</h4>
+                        <button class="neu-btn demo-btn physics-burst">Activate Me</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Theme Customizer -->
+        <section id="customizer" class="demo-section">
+            <div class="section-header">
+                <h2 class="section-title">🎨 Theme Customizer</h2>
+                <p class="section-description">
+                    Real-time theme customization with color and style adjustments.
+                </p>
+            </div>
+
+            <div class="customizer-grid">
+                <div class="color-controls neu-card">
+                    <h3 class="demo-title">Color Palette</h3>
+
+                    <div class="color-input-group">
+                        <label>Base Color</label>
+                        <input type="color" id="baseColor" value="#2c2c2c">
+                    </div>
+
+                    <div class="color-input-group">
+                        <label>Light Shadow</label>
+                        <input type="color" id="lightColor" value="#3a3a3a">
+                    </div>
+
+                    <div class="color-input-group">
+                        <label>Dark Shadow</label>
+                        <input type="color" id="darkColor" value="#1e1e1e">
+                    </div>
+
+                    <div class="color-input-group">
+                        <label>Accent Color</label>
+                        <input type="color" id="accentColor" value="#4a9eff">
+                    </div>
+
+                    <div id="colorPreview" class="color-preview"></div>
+                </div>
+
+                <div class="theme-preview neu-card">
+                    <h3 class="demo-title">Live Preview</h3>
+                    <div class="preview-components">
+                        <button class="neu-btn demo-btn">Button</button>
+                        <div class="neu-input-wrapper">
+                            <input type="text" class="neu-input" placeholder="Input field">
+                        </div>
+                        <div class="mini-card neu-card neu-card--compact">
+                            <div class="neu-avatar neu-avatar--sm">👤</div>
+                            <span>Card Preview</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance Monitor -->
+        <section id="performance" class="demo-section">
+            <div class="section-header">
+                <h2 class="section-title">📊 Performance Monitor</h2>
+                <p class="section-description">
+                    Monitor animation performance and optimize for different devices.
+                </p>
+            </div>
+
+            <div class="performance-grid">
+                <div class="performance-controls neu-card">
+                    <h3 class="demo-title">Performance Settings</h3>
+
+                    <div class="setting-item">
+                        <span>Show FPS Counter</span>
+                        <div class="neu-toggle">
+                            <input type="checkbox" id="fpsCounter" class="neu-toggle-input">
+                            <label for="fpsCounter" class="neu-toggle-label"></label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <span>GPU Acceleration</span>
+                        <div class="neu-toggle">
+                            <input type="checkbox" id="gpuAcceleration" class="neu-toggle-input" checked>
+                            <label for="gpuAcceleration" class="neu-toggle-label"></label>
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <span>Reduced Motion</span>
+                        <div class="neu-toggle">
+                            <input type="checkbox" id="reducedMotion" class="neu-toggle-input">
+                            <label for="reducedMotion" class="neu-toggle-label"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="performance-stats neu-card">
+                    <h3 class="demo-title">Performance Metrics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🖥️</div>
+                            <div class="stat-value" id="deviceType">Desktop</div>
+                            <div class="stat-label">Device Type</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📱</div>
+                            <div class="stat-value" id="screenSize">1920x1080</div>
+                            <div class="stat-label">Resolution</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🚀</div>
+                            <div class="stat-value" id="browserEngine">WebKit</div>
+                            <div class="stat-label">Engine</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Code Modal -->
+    <div id="codeModal" class="modal" style="display: none;">
+        <div class="modal-content neu-card">
+            <div class="modal-header">
+                <h3>Generated Code</h3>
+                <button class="modal-close" onclick="document.getElementById('codeModal').style.display='none'">×</button>
+            </div>
+            <div class="modal-body">
+                <pre id="modalCode" class="code-display"></pre>
+            </div>
+            <div class="modal-footer">
+                <button class="neu-btn neu-btn--small" onclick="showcase.copyToClipboard(document.getElementById('modalCode').textContent)">
+                    Copy to Clipboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="neu-btn neu-btn--icon neu-floating-btn physics-float" title="Quick Actions">
+        ⚡
+    </button>
+
+    <script src="./showcase.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:assist="clr-namespace:Avalonia.Themes.Neumorphism.Assist">
+
+  <!-- Neumorphism theme ok -->
+
+  
+  <!--Default focus adorner that should fit most common cases-->
+  <ControlTheme x:Key="{x:Type AdornerLayer}" TargetType="AdornerLayer">
+    <Setter Property="DefaultFocusAdorner">
+      <FocusAdornerTemplate>
+        <Border BorderThickness="1" CornerRadius="{Binding $self.(AdornerLayer.AdornedElement).(Border.CornerRadius)}"
+                BorderBrush="{DynamicResource MaterialDesignFocus}" Margin="0">
+        </Border>
+      </FocusAdornerTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

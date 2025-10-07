@@ -1,0 +1,113 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:converters="clr-namespace:Avalonia.Themes.Neumorphism.Converters"
+        xmlns:models="clr-namespace:Avalonia.Themes.Neumorphism.Models"
+        xmlns:system="clr-namespace:System;assembly=netstandard"
+        xmlns:controls="clr-namespace:Avalonia.Themes.Neumorphism.Controls"
+        xmlns:assist="clr-namespace:Avalonia.Themes.Neumorphism.Assist"
+        x:DataType="controls:SnackbarHost">
+
+
+  <!-- Neumorphism theme ok -->
+
+  <!--Default SnackbarHost theme-->
+  <ControlTheme x:Key="{x:Type controls:SnackbarHost}" TargetType="controls:SnackbarHost">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="assist:SnackbarHostAssist.SnackbarCornerRadius" Value="10" />
+    <Setter Property="assist:SnackbarHostAssist.SnackbarBackground" Value="{DynamicResource MaterialDesignPaper}" />
+    <Setter Property="assist:SnackbarHostAssist.SnackbarVerticalOffset" Value="50" />
+    <Setter Property="Template">
+      <ControlTemplate>
+          <Panel>
+            <Border Name="PART_SnackbarHostHiddenBorder" IsVisible="False"
+                   CornerRadius="{TemplateBinding assist:SnackbarHostAssist.SnackbarCornerRadius}"
+                   Background="{TemplateBinding assist:SnackbarHostAssist.SnackbarBackground}"
+                   Width="NaN"
+                   Height="NaN"
+                   Tag="{TemplateBinding assist:SnackbarHostAssist.SnackbarVerticalOffset}"/>
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}" />
+            <ItemsControl Name="PART_SnackbarHostItemsContainer"
+                          HorizontalAlignment="{TemplateBinding SnackbarHorizontalAlignment}"
+                          VerticalAlignment="{TemplateBinding SnackbarVerticalAlignment}"
+                          ItemsSource="{CompiledBinding $parent[controls:SnackbarHost].SnackbarModels}">
+              
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <ReversibleStackPanel />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              
+              
+              <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="models:SnackbarModel">
+                  <controls:Card Name="PART_SnackbarCard" Padding="0" Margin="8" Theme="{StaticResource CardInset}"
+                                 Tag="{CompiledBinding IsAnimated}"
+                                 CornerRadius="{Binding ElementName=PART_SnackbarHostHiddenBorder, Path=CornerRadius}"
+                                 Background="{Binding ElementName=PART_SnackbarHostHiddenBorder, Path=Background}"
+                                 Width="{CompiledBinding Width}"
+                                 Height="{CompiledBinding Height}"
+                                 MinHeight="20" MaxHeight="800">
+
+                    <controls:Card.Styles>
+                      <Style Selector="controls|Card[Tag=True]">
+                        <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+                        <Style.Animations>
+                          <Animation Duration="0:0:0.75" Delay="0:0:0.0" Easing="QuadraticEaseOut" FillMode="Forward">
+                            <KeyFrame Cue="0%">
+                              <Setter Property="TranslateTransform.Y" Value="100"/>
+                            </KeyFrame>
+                            <KeyFrame Cue="100%">
+                              <Setter Property="TranslateTransform.Y" Value="{Binding ElementName=PART_SnackbarHostHiddenBorder, Path=Tag}"/>
+                            </KeyFrame>
+                          </Animation>
+                        </Style.Animations>
+                      </Style>
+                      <Style Selector="controls|Card[Tag=False]">
+                        <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+                        <Style.Animations>
+                          <Animation Duration="0:0:0.0" Easing="QuadraticEaseOut" FillMode="Forward">
+                            <KeyFrame Cue="0%">
+                              <Setter Property="TranslateTransform.Y" Value="{Binding ElementName=PART_SnackbarHostHiddenBorder, Path=Tag}"/>
+                            </KeyFrame>
+                            <KeyFrame Cue="100%">
+                              <Setter Property="TranslateTransform.Y" Value="{Binding ElementName=PART_SnackbarHostHiddenBorder, Path=Tag}"/>
+                            </KeyFrame>
+                          </Animation>
+                        </Style.Animations>
+                      </Style>
+                    </controls:Card.Styles>
+                  
+                    <Grid ColumnDefinitions="*" RowDefinitions="*,Auto" Margin="10">
+                      <ContentPresenter Grid.Column="0" Grid.Row="0" Margin="0" VerticalContentAlignment="Center"
+                                        Content="{CompiledBinding Content,
+                                          Converter={x:Static converters:WrapContentIntoContentPresenterConverter.Instance}}">
+                        <ContentPresenter.DataTemplates>
+                          <DataTemplate DataType="system:String">
+                            <TextBlock Name="PART_SnackbarSupportingText" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" TextAlignment="Center" Text="{CompiledBinding}" />
+                          </DataTemplate>
+                        </ContentPresenter.DataTemplates>
+                      </ContentPresenter>
+
+                      <Button Grid.Column="0" Grid.Row="1" Margin="0,5,0,0" VerticalAlignment="Center"
+                              Content="{Binding Button}" Width="NaN" Height="40"
+                              Theme="{StaticResource ButtonFlat}" Background="{DynamicResource PrimaryHueLightBrush}" Foreground="White"
+                              Command="{Binding Command}"
+                              IsVisible="{CompiledBinding !!Command}"/>
+                    </Grid>
+                  </controls:Card>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ ItemsControl#PART_SnackbarHostItemsContainer TextBlock#PART_SnackbarSupportingText">
+      <Setter Property="TextAlignment" Value="Center" />
+      <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+      <Setter Property="MaxLines" Value="2" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

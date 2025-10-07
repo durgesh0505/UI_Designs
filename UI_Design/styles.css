@@ -1,0 +1,598 @@
+/* ===================================
+   CSS VARIABLES - DESIGN SYSTEM
+   =================================== */
+:root {
+  /* Base Colors */
+  --primary-color: #6c63ff;
+  --secondary-color: #4ecdc4;
+  --accent-color: #ff6b6b;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+
+  /* Neumorphic Variables */
+  --neu-bg: #e6e7ee;
+  --neu-shadow-light: rgba(255, 255, 255, 0.9);
+  --neu-shadow-dark: rgba(163, 177, 198, 0.6);
+  --neu-distance: 8px;
+  --neu-blur: 16px;
+  --neu-radius: 12px;
+
+  /* Glassmorphic Variables */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg-strong: rgba(255, 255, 255, 0.25);
+  --glass-blur: 12px;
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+
+  /* Typography */
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+}
+
+/* ===================================
+   BASE STYLES
+   =================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Animated Gradient Background */
+.background {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #f5576c 75%,
+    #4facfe 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  padding: var(--space-lg);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===================================
+   NEUMORPHIC MIXINS (CSS CLASSES)
+   =================================== */
+.neu-raised {
+  background: var(--neu-bg);
+  box-shadow:
+    var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-shadow-dark),
+    calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-shadow-light);
+  border-radius: var(--neu-radius);
+}
+
+.neu-inset {
+  background: var(--neu-bg);
+  box-shadow:
+    inset var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-shadow-dark),
+    inset calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-shadow-light);
+  border-radius: var(--neu-radius);
+}
+
+.neu-flat {
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius);
+}
+
+/* ===================================
+   GLASSMORPHIC MIXINS
+   =================================== */
+.glass-base {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--neu-radius);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--neu-radius);
+  box-shadow: var(--glass-shadow);
+}
+
+/* ===================================
+   NAVIGATION - GLASSMORPHIC
+   =================================== */
+.glass-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-xl);
+  margin-bottom: var(--space-xl);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--neu-radius);
+  box-shadow: var(--glass-shadow);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* ===================================
+   BUTTONS - NEUMORPHIC
+   =================================== */
+.neu-btn {
+  padding: var(--space-sm) var(--space-lg);
+  border: none;
+  border-radius: var(--neu-radius);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--neu-bg);
+  color: var(--text-primary);
+  box-shadow:
+    var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-shadow-dark),
+    calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-shadow-light);
+}
+
+.neu-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    calc(var(--neu-distance) + 2px) calc(var(--neu-distance) + 2px) calc(var(--neu-blur) + 4px) var(--neu-shadow-dark),
+    calc(-1 * var(--neu-distance) - 2px) calc(-1 * var(--neu-distance) - 2px) calc(var(--neu-blur) + 4px) var(--neu-shadow-light);
+}
+
+.neu-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 4px 4px 8px var(--neu-shadow-dark),
+    inset -4px -4px 8px var(--neu-shadow-light);
+}
+
+.neu-btn--primary {
+  background: linear-gradient(145deg, #7c73ff, #5b52cc);
+  color: white;
+  box-shadow:
+    var(--neu-distance) var(--neu-distance) var(--neu-blur) rgba(92, 82, 204, 0.4),
+    calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) rgba(255, 255, 255, 0.1);
+}
+
+.neu-btn--secondary {
+  background: linear-gradient(145deg, #54d4cc, #3da599);
+  color: white;
+  box-shadow:
+    var(--neu-distance) var(--neu-distance) var(--neu-blur) rgba(61, 165, 153, 0.4),
+    calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) rgba(255, 255, 255, 0.1);
+}
+
+.neu-btn--ghost {
+  background: transparent;
+  color: var(--text-primary);
+  box-shadow: none;
+  border: 2px solid var(--glass-border);
+}
+
+.neu-btn--icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+}
+
+/* ===================================
+   CARDS - GLASSMORPHIC WITH NEU ELEMENTS
+   =================================== */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--neu-radius);
+  box-shadow: var(--glass-shadow);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.neu-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f0f0f3, #cacace);
+  box-shadow:
+    8px 8px 16px var(--neu-shadow-dark),
+    -8px -8px 16px var(--neu-shadow-light);
+  position: relative;
+}
+
+.neu-avatar::before {
+  content: "👤";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+}
+
+/* ===================================
+   FORMS - HYBRID APPROACH
+   =================================== */
+.neu-input-group {
+  margin-bottom: var(--space-lg);
+}
+
+.neu-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.neu-input {
+  width: 100%;
+  padding: var(--space-md);
+  border: none;
+  border-radius: var(--neu-radius);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  background: var(--neu-bg);
+  color: var(--text-primary);
+  box-shadow:
+    inset 6px 6px 12px var(--neu-shadow-dark),
+    inset -6px -6px 12px var(--neu-shadow-light);
+  transition: box-shadow 0.3s ease;
+}
+
+.neu-input:focus {
+  outline: none;
+  box-shadow:
+    inset 6px 6px 12px var(--neu-shadow-dark),
+    inset -6px -6px 12px var(--neu-shadow-light),
+    0 0 0 3px rgba(108, 99, 255, 0.2);
+}
+
+.button-group {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+/* ===================================
+   CONTENT GRID
+   =================================== */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+}
+
+/* ===================================
+   NEUMORPHIC PANELS
+   =================================== */
+.neu-panel {
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius);
+  padding: var(--space-xl);
+  box-shadow:
+    var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-shadow-dark),
+    calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-shadow-light);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.neu-stat {
+  padding: var(--space-lg);
+  text-align: center;
+  background: var(--neu-bg);
+  border-radius: var(--neu-radius);
+  box-shadow:
+    inset 4px 4px 8px var(--neu-shadow-dark),
+    inset -4px -4px 8px var(--neu-shadow-light);
+}
+
+.stat-number {
+  display: block;
+  font-size: var(--font-size-2xl);
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* ===================================
+   GLASSMORPHIC PANELS
+   =================================== */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--neu-radius);
+  box-shadow: var(--glass-shadow);
+  padding: var(--space-xl);
+}
+
+.panel-title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-lg);
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* ===================================
+   TOGGLE SWITCHES - NEUMORPHIC
+   =================================== */
+.neu-toggle {
+  position: relative;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-label {
+  display: block;
+  width: 50px;
+  height: 26px;
+  background: var(--neu-bg);
+  border-radius: 26px;
+  cursor: pointer;
+  position: relative;
+  box-shadow:
+    inset 3px 3px 6px var(--neu-shadow-dark),
+    inset -3px -3px 6px var(--neu-shadow-light);
+  transition: all 0.3s ease;
+}
+
+.toggle-label::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: var(--neu-bg);
+  border-radius: 50%;
+  box-shadow:
+    3px 3px 6px var(--neu-shadow-dark),
+    -3px -3px 6px var(--neu-shadow-light);
+  transition: all 0.3s ease;
+}
+
+.toggle-input:checked + .toggle-label::after {
+  transform: translateX(24px);
+  background: linear-gradient(145deg, #7c73ff, #5b52cc);
+}
+
+/* ===================================
+   MUSIC PLAYER - HYBRID
+   =================================== */
+.music-player {
+  grid-column: span 2;
+}
+
+.player-content {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  grid-template-rows: auto auto auto;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.album-art {
+  grid-row: span 3;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(145deg, #f0f0f3, #cacace);
+  border-radius: var(--neu-radius);
+  box-shadow:
+    inset 4px 4px 8px var(--neu-shadow-dark),
+    inset -4px -4px 8px var(--neu-shadow-light);
+  position: relative;
+}
+
+.album-art::before {
+  content: "🎵";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 32px;
+}
+
+.track-info h4 {
+  margin: 0;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.track-info p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--font-size-sm);
+}
+
+.player-controls {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.progress-bar {
+  grid-column: 2 / -1;
+  margin-top: var(--space-md);
+}
+
+.neu-progress {
+  width: 100%;
+  height: 6px;
+  background: var(--neu-bg);
+  border-radius: 6px;
+  box-shadow:
+    inset 2px 2px 4px var(--neu-shadow-dark),
+    inset -2px -2px 4px var(--neu-shadow-light);
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 35%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+/* ===================================
+   TYPOGRAPHY
+   =================================== */
+.neu-text {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-shadow:
+    1px 1px 2px var(--neu-shadow-light),
+    -1px -1px 2px var(--neu-shadow-dark);
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+@media (max-width: 768px) {
+  .background {
+    padding: var(--space-md);
+  }
+
+  .glass-nav {
+    flex-direction: column;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .music-player {
+    grid-column: span 1;
+  }
+
+  .player-content {
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .player-controls {
+    grid-column: span 2;
+    justify-content: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+}
+
+/* ===================================
+   ACCESSIBILITY
+   =================================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .background {
+    animation: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.neu-btn:focus,
+.neu-input:focus,
+.toggle-label:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --neu-shadow-dark: rgba(0, 0, 0, 0.8);
+    --neu-shadow-light: rgba(255, 255, 255, 1);
+    --glass-border: rgba(255, 255, 255, 0.8);
+  }
+}

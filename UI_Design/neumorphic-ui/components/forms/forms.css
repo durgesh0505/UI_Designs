@@ -1,0 +1,620 @@
+/* ===================================
+   FORM ELEMENTS - PHYSICS-ENHANCED INSETS
+   =================================== */
+
+/* Form Input Wrapper */
+.neu-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--neu-space-sm);
+}
+
+/* Form Labels */
+.neu-label {
+    font-size: var(--neu-font-size-sm);
+    font-weight: 600;
+    color: var(--neu-text-secondary);
+    text-shadow: 1px 1px 1px var(--neu-dark);
+    transition: color 0.3s var(--spring-gentle);
+}
+
+/* Text Inputs */
+.neu-input {
+    padding: var(--neu-space-md);
+    border: none;
+    border-radius: var(--neu-radius);
+    font-family: var(--neu-font-family);
+    font-size: var(--neu-font-size-base);
+    color: var(--neu-text-primary);
+    background: var(--neu-base);
+    will-change: box-shadow, transform;
+
+    /* PHYSICS-BASED INPUT - Liquid mercury feeling */
+    transition:
+        box-shadow 0.4s var(--spring-gentle),
+        transform 0.3s var(--spring-gentle),
+        filter 0.2s ease;
+
+    /* TRUE NEUMORPHIC INSET - Surface carving effect */
+    box-shadow:
+        inset calc(var(--neu-distance) * 0.75) calc(var(--neu-distance) * 0.75) calc(var(--neu-blur) * 0.75) var(--neu-dark),
+        inset calc(-1 * var(--neu-distance) * 0.5) calc(-1 * var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-light);
+}
+
+.neu-input:hover {
+    filter: brightness(1.02);
+    box-shadow:
+        inset calc(var(--neu-distance) + 1px) calc(var(--neu-distance) + 1px) calc(var(--neu-blur) + 2px) var(--neu-dark),
+        inset calc(-1 * var(--neu-distance) - 1px) calc(-1 * var(--neu-distance) - 1px) calc(var(--neu-blur) + 2px) var(--neu-light),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.neu-input:focus {
+    outline: none;
+    transform: scale(1.01);
+    filter: brightness(1.05);
+
+    /* FOCUSED STATE - Energy flowing into input */
+    box-shadow:
+        inset var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark),
+        inset calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-light),
+        0 0 0 3px rgba(74, 158, 255, 0.4),
+        inset 0 0 20px rgba(74, 158, 255, 0.1); /* Internal energy glow */
+
+    transition:
+        box-shadow 0.3s var(--spring-bounce),
+        transform 0.2s var(--spring-bounce);
+}
+
+/* Label animation on focus */
+.neu-input:focus + .neu-label,
+.neu-input-wrapper:focus-within .neu-label {
+    color: var(--neu-accent);
+    text-shadow: 0 0 8px rgba(74, 158, 255, 0.3);
+}
+
+.neu-input::placeholder {
+    color: var(--neu-text-muted);
+}
+
+/* ===================================
+   TOGGLE SWITCHES
+   =================================== */
+
+.neu-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.neu-toggle {
+    position: relative;
+}
+
+.neu-toggle-input {
+    display: none;
+}
+
+.neu-toggle-label {
+    display: block;
+    width: 60px;
+    height: 32px;
+    background: var(--neu-base);
+    border-radius: 32px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+
+    /* INSET TRACK */
+    box-shadow:
+        inset 6px 6px 12px var(--neu-dark),
+        inset -6px -6px 12px var(--neu-light);
+}
+
+.neu-toggle-label::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    background: var(--neu-base);
+    border-radius: 50%;
+    transition: all 0.3s var(--spring-bounce);
+
+    /* RAISED THUMB */
+    box-shadow:
+        -4px -4px 8px var(--neu-light),
+        4px 4px 8px var(--neu-dark);
+}
+
+/* Toggle Active State */
+.neu-toggle-input:checked + .neu-toggle-label {
+    background: var(--neu-accent);
+}
+
+.neu-toggle-input:checked + .neu-toggle-label::after {
+    transform: translateX(28px);
+    background: var(--neu-base);
+    box-shadow:
+        -6px -6px 12px var(--neu-light),
+        6px 6px 12px var(--neu-dark),
+        0 0 12px rgba(74, 158, 255, 0.3);
+}
+
+/* ===================================
+   CHECKBOXES
+   =================================== */
+
+.neu-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--neu-space-md);
+    cursor: pointer;
+}
+
+.neu-checkbox {
+    position: relative;
+}
+
+.neu-checkbox-input {
+    display: none;
+}
+
+.neu-checkbox-label {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: var(--neu-base);
+    border-radius: var(--neu-radius);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s var(--spring-gentle);
+
+    /* INSET CHECKBOX */
+    box-shadow:
+        inset 4px 4px 8px var(--neu-dark),
+        inset -4px -4px 8px var(--neu-light);
+}
+
+.neu-checkbox-label::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: var(--neu-accent);
+    font-weight: bold;
+    font-size: 14px;
+    transition: transform 0.2s var(--spring-bounce);
+}
+
+.neu-checkbox-input:checked + .neu-checkbox-label::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ===================================
+   RADIO BUTTONS
+   =================================== */
+
+.neu-radio-wrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--neu-space-md);
+    cursor: pointer;
+}
+
+.neu-radio {
+    position: relative;
+}
+
+.neu-radio-input {
+    display: none;
+}
+
+.neu-radio-label {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: var(--neu-base);
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s var(--spring-gentle);
+
+    /* INSET RADIO */
+    box-shadow:
+        inset 4px 4px 8px var(--neu-dark),
+        inset -4px -4px 8px var(--neu-light);
+}
+
+.neu-radio-label::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 8px;
+    height: 8px;
+    background: var(--neu-accent);
+    border-radius: 50%;
+    transition: transform 0.2s var(--spring-bounce);
+    box-shadow: 0 0 8px var(--neu-accent);
+}
+
+.neu-radio-input:checked + .neu-radio-label::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ===================================
+   FORM GROUPS
+   =================================== */
+
+.neu-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--neu-space-md);
+    margin-bottom: var(--neu-space-lg);
+}
+
+.neu-form-row {
+    display: flex;
+    gap: var(--neu-space-md);
+    align-items: end;
+}
+
+.neu-form-row .neu-input-wrapper {
+    flex: 1;
+}
+
+/* ===================================
+   LIGHT THEME FORM TEXT OVERRIDES
+   =================================== */
+
+/* Ensure all form text is readable in light theme */
+[data-base-theme="light"] .neu-form-group {
+    color: var(--neu-text-primary);
+}
+
+[data-base-theme="light"] .neu-checkbox-wrapper,
+[data-base-theme="light"] .neu-radio-wrapper,
+[data-base-theme="light"] .neu-toggle-wrapper {
+    color: var(--neu-text-primary);
+}
+
+/* ===================================
+   CALENDAR COMPONENT
+   =================================== */
+
+.calendar {
+    background: var(--neu-base);
+    border-radius: var(--neu-radius-lg);
+    padding: 1.5rem;
+    box-shadow:
+        calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+        calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-header button {
+    background: var(--neu-base);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--neu-radius-md);
+    color: var(--neu-text-primary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+    transition: all var(--neu-transition-fast);
+}
+
+.calendar-header button:hover {
+    box-shadow:
+        calc(var(--neu-distance) * -1.3) calc(var(--neu-distance) * -1.3) calc(var(--neu-blur) * 1.2) var(--neu-light),
+        calc(var(--neu-distance) * 1.3) calc(var(--neu-distance) * 1.3) calc(var(--neu-blur) * 1.2) var(--neu-dark);
+}
+
+.calendar-header button:active {
+    box-shadow:
+        inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+        inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-light);
+}
+
+.calendar-header span {
+    font-weight: 600;
+    color: var(--neu-text-primary);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.calendar-day {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--neu-text-secondary);
+    padding: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.calendar-date {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--neu-radius-sm);
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--neu-text-primary);
+    background: var(--neu-base);
+    box-shadow:
+        calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) var(--neu-blur) var(--neu-light),
+        calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) var(--neu-blur) var(--neu-dark);
+    transition: all var(--neu-transition-fast);
+}
+
+.calendar-date:hover {
+    box-shadow:
+        calc(var(--neu-distance) * -0.8) calc(var(--neu-distance) * -0.8) calc(var(--neu-blur) * 1.2) var(--neu-light),
+        calc(var(--neu-distance) * 0.8) calc(var(--neu-distance) * 0.8) calc(var(--neu-blur) * 1.2) var(--neu-dark);
+}
+
+.calendar-date.active {
+    color: var(--neu-accent);
+    box-shadow:
+        inset calc(var(--neu-distance) * 0.3) calc(var(--neu-distance) * 0.3) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+        inset calc(var(--neu-distance) * -0.3) calc(var(--neu-distance) * -0.3) calc(var(--neu-blur) * 0.5) var(--neu-light);
+}
+
+.calendar-date.today {
+    font-weight: 600;
+    border: 2px solid var(--neu-accent);
+}
+
+.calendar-date.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.calendar-date.disabled:hover {
+    box-shadow:
+        calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) var(--neu-blur) var(--neu-light),
+        calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) var(--neu-blur) var(--neu-dark);
+}
+
+/* ===================================
+   DATE PICKER COMPONENT
+   =================================== */
+
+.date-picker {
+    position: relative;
+    width: 100%;
+}
+
+.date-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--neu-radius-md);
+    color: var(--neu-text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow:
+        inset calc(var(--neu-distance) * 0.75) calc(var(--neu-distance) * 0.75) calc(var(--neu-blur) * 0.75) var(--neu-dark),
+        inset calc(-1 * var(--neu-distance) * 0.5) calc(-1 * var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-light);
+    transition: all var(--neu-transition-fast);
+}
+
+.date-input:focus {
+    outline: none;
+    box-shadow:
+        inset var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark),
+        inset calc(-1 * var(--neu-distance)) calc(-1 * var(--neu-distance)) var(--neu-blur) var(--neu-light),
+        0 0 0 2px var(--neu-accent);
+}
+
+.date-picker-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    background: var(--neu-base);
+    border-radius: var(--neu-radius-lg);
+    padding: 1rem;
+    box-shadow:
+        calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+        calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+    z-index: 100;
+    display: none;
+}
+
+.date-picker-dropdown.show {
+    display: block;
+}
+
+/* ===================================
+   DROPDOWN COMPONENT
+   =================================== */
+
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-toggle {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--neu-base);
+    border: none;
+    border-radius: var(--neu-radius-md);
+    color: var(--neu-text-primary);
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow:
+        calc(var(--neu-distance) * -1) calc(var(--neu-distance) * -1) var(--neu-blur) var(--neu-light),
+        var(--neu-distance) var(--neu-distance) var(--neu-blur) var(--neu-dark);
+    transition: all var(--neu-transition-fast);
+}
+
+.dropdown-toggle:hover {
+    box-shadow:
+        calc(var(--neu-distance) * -1.2) calc(var(--neu-distance) * -1.2) calc(var(--neu-blur) * 1.1) var(--neu-light),
+        calc(var(--neu-distance) * 1.2) calc(var(--neu-distance) * 1.2) calc(var(--neu-blur) * 1.1) var(--neu-dark);
+}
+
+.dropdown-toggle:active {
+    box-shadow:
+        inset calc(var(--neu-distance) * 0.5) calc(var(--neu-distance) * 0.5) calc(var(--neu-blur) * 0.5) var(--neu-dark),
+        inset calc(var(--neu-distance) * -0.5) calc(var(--neu-distance) * -0.5) calc(var(--neu-blur) * 0.5) var(--neu-light);
+}
+
+.dropdown-arrow {
+    transition: transform var(--neu-transition-fast);
+}
+
+.dropdown.show .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+    background: var(--neu-base);
+    border-radius: var(--neu-radius-md);
+    padding: 0.5rem;
+    box-shadow:
+        calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+        calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+    z-index: 100;
+    display: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    border-radius: var(--neu-radius-sm);
+    cursor: pointer;
+    color: var(--neu-text-primary);
+    transition: all var(--neu-transition-fast);
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-item.selected {
+    color: var(--neu-accent);
+    font-weight: 500;
+}
+
+/* Dropdown Multiple Selection */
+.dropdown-multi .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-multi .dropdown-checkbox-container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.dropdown-multi .dropdown-item input[type="checkbox"] {
+    display: none;
+}
+
+.dropdown-multi .dropdown-checkbox-label {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: var(--neu-base);
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all var(--neu-transition-fast);
+    box-shadow:
+        inset 3px 3px 6px var(--neu-dark),
+        inset -3px -3px 6px var(--neu-light);
+}
+
+.dropdown-multi .dropdown-checkbox-label::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    color: var(--neu-accent);
+    font-weight: bold;
+    font-size: 12px;
+    transition: transform 0.2s var(--spring-bounce);
+}
+
+.dropdown-multi .dropdown-item input[type="checkbox"]:checked + .dropdown-checkbox-label::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ===================================
+   LIVE TIME DISPLAY
+   =================================== */
+
+.live-time {
+    background: var(--neu-base);
+    border-radius: var(--neu-radius-lg);
+    padding: 1.5rem;
+    box-shadow:
+        calc(var(--neu-distance) * -2) calc(var(--neu-distance) * -2) calc(var(--neu-blur) * 2) var(--neu-light),
+        calc(var(--neu-distance) * 2) calc(var(--neu-distance) * 2) calc(var(--neu-blur) * 2) var(--neu-dark);
+    text-align: center;
+}
+
+.live-time-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--neu-text-secondary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.live-time-display {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--neu-text-primary);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
+}
+
+.live-time-seconds {
+    color: var(--neu-accent);
+}
